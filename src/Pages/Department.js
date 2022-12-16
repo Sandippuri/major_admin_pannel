@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { forwardRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useGetAllStudentsQuery } from '../RTK/slices/student';
+import { useGetAllDepartmentsQuery } from '../RTK/slices/department';
 import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -43,36 +42,34 @@ const tableIcons = {
 };
 
 
-const Student = () => {
+const Department = () => {
   // con[st dispatch = useDispatch();
-  const { data, isLoading } = useGetAllStudentsQuery();
+  const { data, isLoading } = useGetAllDepartmentsQuery();
   const navigate = useNavigate()
   // const data = useSelector()
   console.log(data);
   const columns = [
     { title: "S No.", field: "id" },
-    { title: "Student name", field: "name" },
-    { title: "Roll Number", field: "roll" },
-    { title: "Batch", field: "batch" },
-    { title: "Department", field: "department" },
+    { title: "Department name", field: "name" },
+    { title: "Description", field: "description" },
   ]
 
   return (
     <div className='flex flex-col w-full mx-5 my-5'>
       <div className="flex w-full justify-between mb-3">
-        <h2 className='text-xl font-bold'>Student Details </h2>
-        <button className="bg-gray-900 text-white rounded-md px-4 py-2" onClick={() => navigate("/addStudent")}>+ Add Student</button>
+        <h2 className='text-xl font-bold'>Department Details </h2>
+        <button className="bg-gray-900 text-white rounded-md px-4 py-2" onClick={() => navigate("/addDepartment")}>+ Add Department</button>
       </div>
       <div className="grid grid-cols-2 gap-5 my-3">
-        <Card title={"Total Students"} count={1204} />
-        <Card title={"New Students"} count={5000} />
+        <Card title={"Civil Engineering"} count={800} />
+        <Card title={"Computer Engineering"} count={700} />
       </div>
       <div>
       {isLoading && <h1 className='text-4xl text-center text-black'>Loading...</h1>}
       {!!data && <MaterialTable
         columns={columns}
         icons={tableIcons}
-        title="Students"
+        title="Departments"
         data={data.map(o => ({ ...o }))}  
         options={{ exportButton: true, exportAllData: true, addRowPosition: "first", actionsColumnIndex: 1, pageSize:10 }}
       />}
@@ -82,4 +79,4 @@ const Student = () => {
   )
 }
 
-export default Student
+export default Department

@@ -10,7 +10,7 @@ import Textarera from '../components/ui/textarera'
 
 import { useAddCollegeMutation } from '../RTK/slices/college'
 
-const AddStudent = () => {
+const AddTeacher = () => {
   const [collegeState, setCollegeState] = useState({name: '', address: '', description: ''});
   const [addCollege,response]=useAddCollegeMutation();
 
@@ -28,17 +28,17 @@ const handleSubmit=async (e) => {
 
   return (
     <div className='m-5 p-5 border-box w-full'>
-      <h2 className="text-2xl text-gray-900 font-bold">Add Students here</h2>
-      <p className="text-md text-gray-600">Please fill up the form below carefully to add Students details</p>
+      <h2 className="text-2xl text-gray-900 font-bold">Add Teachers here</h2>
+      <p className="text-md text-gray-600">Please fill up the form below carefully to add Teachers details</p>
       <form className="grid grid-cols-3 gap-4 mt-5">
-        <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"studentname"} title={"Student Name"} placeholder={"Enter name of student"} required={true} />
-        <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"id"} title={"Section"} placeholder={"Enter the section"} required={true} />
-        <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"id"} title={"Roll No."} placeholder={"Enter the roll no."} required={true} />
+        <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"name"} title={"Teacher Name"} placeholder={"Enter name of teacher"} required={true} />
+        <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"id"} title={"Teacher id"} placeholder={"Enter the id of teacher"} required={true} />
+        <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"post"} title={"Post"} placeholder={"Enter the post of teacher"} required={true} />
         <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label">Are you a newly joined student</FormLabel>
+      <FormLabel id="demo-radio-buttons-group-label">Is s/he a doctor?</FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="yes"
+        defaultValue="no"
         name="radio-buttons-group"
       >
         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
@@ -47,6 +47,7 @@ const handleSubmit=async (e) => {
     </FormControl>
         
   
+        <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"name"} title={"Department"} placeholder={"Enter the department"} required={true} />
         <Textarera value={collegeState.description} onChange={handleChange} className={'col-span-3'} name={"description"} type={"text area"} id={"collegename"} title={"Description (Optional)"} placeholder={"Descriptions"} required={true} />
         <button className='bg-gray-900 text-white py-3 rounded-md w-2/3' type='button' onClick={handleSubmit}>Submit</button>      
       </form>
@@ -54,4 +55,4 @@ const handleSubmit=async (e) => {
   )
 }
 
-export default AddStudent
+export default AddTeacher

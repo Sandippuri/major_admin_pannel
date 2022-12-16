@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     return (
         <>
-            <nav className="bg-white border-gray-200 dark:bg-gray-900 ">
+            <nav className="bg-black border-gray-200 dark:bg-gray-900 ">
                 <div className="container flex flex-wrap items-center justify-between mx-10">
                     <Link to="/" className="  flex items-center text-white text-xl font-bold">
                         IOE DashBoard
