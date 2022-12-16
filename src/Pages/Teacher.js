@@ -48,8 +48,6 @@ const Teacher = () => {
   const navigate = useNavigate()
   // const data = useSelector()
   
-
-  
   console.log(data);
   const columns = [
     { title: "S No.", field: "id" },
@@ -65,9 +63,7 @@ const Teacher = () => {
         <h2 className='text-xl font-bold'>Teacher Details </h2>
         <button className="bg-gray-900 text-white rounded-md px-4 py-2" onClick={() => navigate("/addTeacher")}>+ Add Teacher</button>
       </div>
-      <div className="grid grid-cols-2 gap-5 my-3">
-        <Card title={"Total Teachers"} count={70} />
-      </div>
+      
       <div>
       {isLoading && <h1 className='text-4xl text-center text-black'>Loading...</h1>}
       {!!data && <MaterialTable
