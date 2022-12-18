@@ -1,11 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Autocomplete from '@mui/material/Autocomplete';
 import Formfield from '../components/ui/formfield'
+import TextField from '@mui/material/TextField';
 import Textarera from '../components/ui/textarera'
 
 import { useAddCollegeMutation } from '../RTK/slices/college'
@@ -25,6 +22,33 @@ const handleSubmit=async (e) => {
   console.log(res);
   console.log(response);
 }
+const datelist = [
+  { label: 2078 },
+  { label: 2077 },
+  { label: 2026 },
+  { label: 2075 },
+  { label: 2074 },
+  { label: 2073 },
+  { label: 2072 },
+  { label: 2071 },
+  { label: 2070 },
+  { label: 2069 },
+  { label: 2068 },
+  { label: 2067},
+  { label: 2066 },
+  { label: 2065 },
+  { label: 2064 },
+  { label: 2063},
+  { label: 2062 },
+  { label: 2061 },
+  { label: 2060},
+  { label: 2059 },
+  { label: 2058 },
+  { label: 2057},
+  { label: 2056 },
+  { label: 2055 },
+
+];
 
   return (
     <div className='m-5 p-5 border-box w-full'>
@@ -34,17 +58,15 @@ const handleSubmit=async (e) => {
         <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"studentname"} title={"Student Name"} placeholder={"Enter name of student"} required={true} />
         <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"id"} title={"Section"} placeholder={"Enter the section"} required={true} />
         <Formfield value={collegeState.name} onChange={handleChange} className={''} name={"name"} type={"text"} id={"id"} title={"Roll No."} placeholder={"Enter the roll no."} required={true} />
-        <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label">Are you a newly joined student</FormLabel>
-      <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="yes"
-        name="radio-buttons-group"
-      >
-        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-        <FormControlLabel value="no" control={<Radio />} label="No" />
-      </RadioGroup>
-    </FormControl>
+        <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={datelist}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Batch" />}
+      
+    />
+    
         
   
         <Textarera value={collegeState.description} onChange={handleChange} className={'col-span-3'} name={"description"} type={"text area"} id={"collegename"} title={"Description (Optional)"} placeholder={"Descriptions"} required={true} />
