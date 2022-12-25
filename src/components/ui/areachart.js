@@ -40,7 +40,7 @@ export const data = {
         {
             fill: true,
             label: 'Dataset 2',
-            data: [1,2,4,5,7,22,4],
+            data: [1,24,14,5,17,12,4],
             borderColor: 'rgb(53, 162, 235)',
             backgroundColor: 'rgba(53, 162, 235, 0.5)',
         },
