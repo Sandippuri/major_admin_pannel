@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Textarera from '../components/ui/textarera'
 
 import { useAddCollegeMutation } from '../RTK/slices/college'
+import DashboadLayout from '../components/Layour/DashboadLayout'
 
 const AddStudent = () => {
   const [collegeState, setCollegeState] = useState({name: '', address: '', description: ''});
@@ -51,7 +52,8 @@ const datelist = [
 ];
 
   return (
-    <div className='m-5 p-5 border-box w-full'>
+    <DashboadLayout childrens={
+      <div className='m-5 p-5 border-box w-full'>
       <h2 className="text-2xl text-gray-900 font-bold">Add Students here</h2>
       <p className="text-md text-gray-600">Please fill up the form below carefully to add Students details</p>
       <form className="grid grid-cols-3 gap-4 mt-5">
@@ -73,6 +75,8 @@ const datelist = [
         <button className='bg-gray-900 text-white py-3 rounded-md w-2/3' type='button' onClick={handleSubmit}>Submit</button>      
       </form>
     </div>
+    }/>
+    
   )
 }
 

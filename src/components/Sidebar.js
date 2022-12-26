@@ -36,11 +36,9 @@ const Sidebar = () => {
       listTitle={"Teachers"}
       navigate={"/teachers"}/>
 
-      <h3 className="text-md font-medium text-black px-5 py-3">News & Updates</h3>
-      <ListItem icon={<SendIcon/>} listTitle={"Events"}/>
+      <h3 className="text-md font-medium text-white px-5 py-3">News & Updates</h3>
       <ListItem icon={<SendIcon/>} listTitle={"Notices"}/>
-      <h3 className="text-md font-medium text-black px-5 py-3">Settings</h3>
-      <ListItem icon={<SendIcon/>} listTitle={"User"}/>
+      <h3 className="text-md font-medium text-white px-5 py-3">Settings</h3>
       <ListItem icon={<SendIcon/>} listTitle={"Admin"}/>
    </div>
 </aside>

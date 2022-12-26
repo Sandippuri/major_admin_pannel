@@ -20,8 +20,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/ui/card';
-//import Spinner from '../components/ui/spinner';
-//import "./spinner.css";
+import DashboadLayout from '../components/Layour/DashboadLayout';
 
 
 const tableIcons = {
@@ -46,7 +45,7 @@ const tableIcons = {
 
 
 const College = () => {
-  // con[st dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { data, isLoading } = useGetAllCollegesQuery();
   const navigate = useNavigate()
   // const data = useSelector()
@@ -58,7 +57,8 @@ const College = () => {
   ]
 
   return (
-    <div className='flex flex-col w-full mx-5 my-5'>
+    <DashboadLayout childrens={
+      <div className='flex flex-col w-full mx-5 my-5'>
       <div className="flex w-full justify-between">
         <h2 className='text-xl font-bold'>College Details </h2>
         <button className="bg-gray-900 text-white rounded-md px-4 py-2" onClick={() => navigate("/addCollege")}>+ Add college</button>
@@ -79,6 +79,8 @@ const College = () => {
       </div>
 
     </div>
+    }/> 
+    
   )
 }
 

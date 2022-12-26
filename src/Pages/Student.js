@@ -19,6 +19,8 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useNavigate } from 'react-router-dom';
+import Card from '../components/ui/card';
+import DashboadLayout from '../components/Layour/DashboadLayout';
 
 
 const tableIcons = {
@@ -56,8 +58,9 @@ const Student = () => {
     { title: "Department", field: "department" },
   ]
 
-  return (
-    <div className='flex flex-col w-full mx-5 my-5'>
+  return ( 
+    <DashboadLayout childrens={
+      <div className='flex flex-col w-full mx-5 my-5'>
       <div className="flex w-full justify-between mb-3">
         <h2 className='text-xl font-bold'>Student Details </h2>
         <button className="bg-gray-900 text-white rounded-md px-4 py-2" onClick={() => navigate("/addStudent")}>+ Add Student</button>
@@ -75,6 +78,8 @@ const Student = () => {
       </div>
 
     </div>
+    }/>  
+    
   )
 }
 

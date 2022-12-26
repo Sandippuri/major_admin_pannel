@@ -17,9 +17,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <Router>
-      <Navbar />
-      <div className="flex">
-        <Sidebar />
         <Routes>
           <Route exact path='/' element={<Homepage />}/>
           <Route  path='/login' element={<Login/>}/>
@@ -32,7 +29,6 @@ function App() {
           <Route  path ='/departments' element={<Department/>}/>
           <Route  path ='/teachers' element={<Teacher/>}/>
         </Routes>
-      </div>
       {/* <Login/> */}
     </Router>
   );
