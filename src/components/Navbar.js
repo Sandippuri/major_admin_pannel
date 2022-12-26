@@ -24,6 +24,8 @@ const Navbar = () => {
                             </Badge>
                         </IconButton>
                         <Profile />
+
+                        {/* Check */}
                     </div>
                 </div>
             </nav>
