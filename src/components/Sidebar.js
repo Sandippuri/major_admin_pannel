@@ -37,9 +37,12 @@ const Sidebar = () => {
       navigate={"/teachers"}/>
 
       <h3 className="text-md font-medium text-white px-5 py-3">News & Updates</h3>
-      <ListItem icon={<SendIcon/>} listTitle={"Notices"}/>
+      <ListItem icon={<SendIcon/>} listTitle={"Notices"}
+      navigate={"/noticeels"} />
       <h3 className="text-md font-medium text-white px-5 py-3">Settings</h3>
-      <ListItem icon={<SendIcon/>} listTitle={"Admin"}/>
+      <ListItem icon={<SendIcon/>} listTitle={"Admin"}
+      navigate={"/resetpassword"}/>
+      
    </div>
 </aside>
 
