@@ -6,7 +6,7 @@ import DashboadLayout from '../components/Layour/DashboadLayout';
 import Tables from '../components/ui/tables';
 
 
-const College = () => {
+const Student = () => {
   // con[st dispatch = useDispatch();
   const { data, isLoading } = useGetAllStudentsQuery();
   const navigate = useNavigate()
@@ -27,6 +27,7 @@ const College = () => {
         <h2 className='text-xl font-bold'>Student Details </h2>
         <button className="bg-gray-900 text-white rounded-md px-4 py-2" onClick={() => navigate("/addStudent")}>+ Add Student</button>
       </div>
+      
       <div>
       {isLoading && <h1 className='text-4xl text-center text-black'>Loading...</h1>}
       {!!data && <Tables data={data} columns={columns}/>}
@@ -37,4 +38,4 @@ const College = () => {
   )
 }
 
-export default College
+export default Student
