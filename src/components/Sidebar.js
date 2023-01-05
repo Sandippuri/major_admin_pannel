@@ -4,7 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 const Sidebar = () => {
   return ( 
-<aside className="w-64 h-[100vh]">
+<aside className="w-64 fixed left-0 top-16 bottom-0 z-0">
    <div className="h-full py-4 px-3 bg-gray-50 dark:bg-gray-900">
       <h3 className="text-md font-medium text-white px-5 py-3">Main</h3>
       <ListItem 

@@ -8,12 +8,12 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     return (
         <>
-            <nav className="bg-white border-gray-200 dark:bg-gray-900 ">
+            <nav className="bg-gray-900 fixed top-0 left-0 right-0 z-10 py-5">
                 <div className="container flex flex-wrap items-center justify-between mx-10">
-                    <Link to="/" className="  flex items-center text-white text-xl font-bold">
+                    <Link to="/" className="flex items-center text-white text-xl font-bold">
                         IOE DashBoard
                     </Link>
-                    <div className="flex items-center md:order-2">
+                    {/* <div className="flex items-center md:order-2">
                         <IconButton
                             size="large"
                             aria-label="show 17 new notifications"
@@ -24,7 +24,7 @@ const Navbar = () => {
                             </Badge>
                         </IconButton>
                         <Profile />
-                    </div>
+                    </div> */}
                 </div>
             </nav>
 
