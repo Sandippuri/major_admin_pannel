@@ -1,11 +1,17 @@
 import React from 'react';
 import Noticeitem from './ui/noticeitem';
-import Doughnutchart from './ui/doughnutchart';
-import Areachart from './ui/areachart';
-import Calender from './ui/calendar';
+import Doughnutchart from './charts/doughnutchart';
+import Areachart from './charts/areachart';
+import Calender from './calender/calendar';
+import { useNavigate } from 'react-router-dom';
+import { useGetAllNoticesQuery } from '../redux-toolkit/apiSlices/notice';
 
 
 const Notice = () => {
+  const { data, isLoading } = useGetAllNoticesQuery();
+  const navigate = useNavigate()
+  // const data = useSelector()
+  console.log(data);
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 m-4'>
       <div className='flex flex-col w-full p-6 text-gray-900 bg-white border border-gray-200 rounded-lg shadow-md'>
@@ -15,21 +21,9 @@ const Notice = () => {
         </div>
         <div className=''>
           <div className="h-[80vh] flex flex-col overflow-scroll scrollbar-hide ">
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
-            <Noticeitem />
+            {data?.map((notice,key)=>{
+              return <Noticeitem id={key} title={notice.description} date={notice.date}/>
+            })}
           </div>
         </div>
       </div>
