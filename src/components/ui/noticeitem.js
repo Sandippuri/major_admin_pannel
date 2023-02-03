@@ -1,16 +1,16 @@
 import React from 'react'
 
-const Noticeitem = () => {
+const Noticeitem = (props) => {
     return (
         <>
-            <div className="flex justify-between mt-3 cursor-pointer shadow-sm gap-3">
+            <div className="flex flex-col justify-between mt-3 cursor-pointer shadow-sm gap-3">
                 
-                    <div className="flex flex-col items-center flex-1 bg-gray-500 text-white py-2 px-4 rounded-l-lg ">
-                        <h1 className='text-2xl font-bold'>5</h1>
-                        <h4 className='text-sm font-medium items-center'>OCT<span>2022</span></h4>
+                    <div className='flex flex-4 font-normal'>
+                        <span className="text-md ">{props.id+1}.</span>
+                        <p className="text-md">{props.title}</p>
                     </div>
-                    <div className='flex flex-wrap flex-4'>
-                        <p className="text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit aut laudantium totam quaerat quis! </p>
+                    <div className="flex flex-col items-end flex-1 text-gray-500 py-2 px-4 rounded-l-lg ">
+                        <h1 className='text-sm'>{props.date}</h1>
                     </div>
             
             </div>
