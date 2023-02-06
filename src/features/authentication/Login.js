@@ -1,5 +1,5 @@
 import React from 'react';
-import Formfield from '../../components/ui/formfield';
+import Formfield from '../../components/ui/inputfield';
 
 const Login = () => {
     return (

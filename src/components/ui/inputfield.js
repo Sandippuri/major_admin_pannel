@@ -1,19 +1,18 @@
 import React from "react";
 
-const Textarera = (props) => {
+const Inputfield = (props) => {
   return (
     <div className={props.className}>
       <label
         htmlFor={props.name}
-        className="block mb-2 text-md font-medium text-gray-900"
+        className="block mb-2 text-md font-medium text-primary"
       >
         {props.title}
       </label>
-      <textarea
-        vaue={props.value}
-        onChange={props.onChange}
-        rows={3}
+      <input
         type={props.type}
+        value={props.value}
+        onChange={props.onChange}
         name={props.name}
         id={props.id}
         className={`${props.width} input-field`}
@@ -24,4 +23,4 @@ const Textarera = (props) => {
   );
 };
 
-export default Textarera;
+export default Inputfield;

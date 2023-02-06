@@ -5,15 +5,15 @@ import { Outlet } from "react-router-dom";
 
 const DashboadLayout = () => {
   return (
-    <div>
-      <Navbar />
-      <div className="flex">
-        <Sidebar />
-        <div className=" ml-64 pt-20 w-full mx-10">
+    <>
+      <Navbar className="layout sticky top-0 z-10" />
+      <Sidebar className="layout fixed h-auto min-h-[calc(100vh-50px)] w-64" />
+      <main className=" pl-64">
+        <div className="layout layout-py">
           <Outlet />
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 

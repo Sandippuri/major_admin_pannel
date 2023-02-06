@@ -3,12 +3,12 @@ import Inputfield from "../../../components/ui/inputfield";
 import Textarera from "../../../components/ui/textarera";
 import Button from "../../../components/ui/button";
 
-const AddNoticeModal = ({ isOpen, closeModal }) => {
+const AddResultModal = ({ isOpen, closeModal }) => {
   return (
     <Modal
       isOpen={isOpen}
       closeModal={closeModal}
-      title="Add Notice"
+      title="Add Result"
       className="w-[30vw]"
     >
       <form className="text-md">
@@ -39,15 +39,14 @@ const AddNoticeModal = ({ isOpen, closeModal }) => {
         />
         <div className="flex justify-end gap-4  ">
           <Button
-            className="btn-primary"
+            className="btn-primary "
             buttonText={"Submit"}
             onClick={() => {}}
           />
-
         </div>
       </form>
     </Modal>
   );
 };
 
-export default AddNoticeModal;
+export default AddResultModal;

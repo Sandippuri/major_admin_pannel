@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .layout{
+        @apply px-[12px] md:px-[16] lg:px-[24px];
+    }
+    .layout-py {
+      @apply py-[12px] md:py-[16] lg:py-[24px];
+    }
+  
+
+    /* typography */
+    .text-1{
+        @apply text-[32px] font-medium leading-[39px];
+    }
+    .text-2 {
+        @apply text-[24px] font-medium leading-[29px];
+      }
+    
+    .text-3 {
+        @apply text-[18.72px] font-medium leading-[23px];
+      }
+    
+    .text-4 {
+        @apply text-[16px] font-medium leading-[20px];
+      }
+    
+    .text-5 {
+        @apply text-[13.28px] font-normal leading-[16px];
+      }
+    
+    .text-6 {
+        @apply text-[10.72px] font-normal leading-[13px];
+      }
+
+      /* button */
+      .btn{
+        @apply px-[34px] py-[10px] rounded-[5px] text-[16px] font-medium leading-[20px];
+      }
+      .btn-small {
+        @apply px-[18px] py-[6px] font-medium rounded-[5px] text-[13.28px] leading-[16px];
+      }
+      .btn-primary {
+        @apply text-white bg-[#23353F];
+      }
+      .btn-secondary{
+        @apply text-black bg-gray-200;
+      }
+
+      /* input field */
+      .input-field{
+        @apply block py-[8px] px-[12px] w-full rounded-[5px] outline-none border border-[rgba(128,128,128,0.19)] focus:border-primary;
+      }
+    
+    
+}

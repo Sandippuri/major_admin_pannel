@@ -5,6 +5,7 @@ import Student from "../../pages/student"
 import Teacher from "../../pages/teacher"
 import Department from "../../pages/department"
 import Notice from "../../pages/notice"
+import Result from "../../pages/result"
 
 const privateRoutes = [
     {
@@ -16,6 +17,7 @@ const privateRoutes = [
         { path: "/teachers", element: <Teacher /> },
         { path: "/departments", element: <Department /> },
         { path: "/notices", element: <Notice /> },
+        { path: "/results", element: <Result/> },
         // { path: "/addCollege", element: <AddCollege /> },
         // { path: "/add-teacher", element: <Homepage /> },
         // { path: "/add-student", element: <Homepage /> },

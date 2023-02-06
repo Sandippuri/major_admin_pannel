@@ -1,7 +1,7 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useGetAllDepartmentsQuery } from "../../redux-toolkit/apiSlices/department";
 import { useNavigate } from "react-router-dom";
-import Tables from "../../components/tables";
+import Tables from "../../components/table/tables";
 import AddDepartmentModal from "./components/addDepartmentModal";
 
 const DepartmentList = () => {
@@ -19,11 +19,11 @@ const DepartmentList = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full mx-5 my-5">
-        <div className="flex w-full justify-between mb-3">
+      <div className="flex flex-col mx-5 my-5">
+        <div className="flex justify-between px-4 py-2">
           <h2 className="text-xl font-bold">Department Details </h2>
           <button
-            className="bg-gray-900 text-white rounded-md px-4 py-2"
+            className="btn btn-primary"
             onClick={() => setAddDepartmentModalOpen(true)}
           >
             + Add Department

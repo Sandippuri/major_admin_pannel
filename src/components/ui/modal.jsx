@@ -36,9 +36,9 @@ const Modal= ({isOpen,closeModal,title="title",children,className="max-w-1800px"
                   )}
                 >
 
-                    <div className="px-[26px] py-[15px] flex items-center justify-between gap-x-2 bg-gray-900">
+                    <div className="px-[26px] py-[15px] flex items-center justify-between gap-x-2 bg-primary">
                       <h3 className="typography-3 text-white">{title}</h3>
-                      <button onClick={closeModal} className='text-white'>X</button>
+                      <button onClick={closeModal} className='btn btn-primary'>X</button>
                     </div>
 
                   <div className="py-[27px] px-[31px]">{children}</div>

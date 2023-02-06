@@ -1,10 +1,10 @@
 import React from 'react';
-import CardMenu from '../../components/CardMenu';
-import Notice from '../../components/Notice';
+import CardMenu from './components/CardMenu';
+import Notice from './components/noticeContainer';
 
 const Dashboard = () => {
   return (
-      <div className='flex max-w-screen max-h-screen flex-col gap-2'>
+      <div className='flex flex-col'>
           <CardMenu/>
           <Notice/>
       </div>      
