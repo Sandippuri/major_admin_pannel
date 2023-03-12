@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 @layer components {
     .layout{
@@ -12,33 +16,9 @@
     }
   
 
-    /* typography */
-    .text-1{
-        @apply text-[32px] font-medium leading-[39px];
-    }
-    .text-2 {
-        @apply text-[24px] font-medium leading-[29px];
-      }
-    
-    .text-3 {
-        @apply text-[18.72px] font-medium leading-[23px];
-      }
-    
-    .text-4 {
-        @apply text-[16px] font-medium leading-[20px];
-      }
-    
-    .text-5 {
-        @apply text-[13.28px] font-normal leading-[16px];
-      }
-    
-    .text-6 {
-        @apply text-[10.72px] font-normal leading-[13px];
-      }
-
       /* button */
       .btn{
-        @apply px-[34px] py-[10px] rounded-[5px] text-[16px] font-medium leading-[20px];
+        @apply px-8 py-3 rounded-[5px] text-[16px] font-medium leading-[20px];
       }
       .btn-small {
         @apply px-[18px] py-[6px] font-medium rounded-[5px] text-[13.28px] leading-[16px];

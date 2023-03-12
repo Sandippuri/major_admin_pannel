@@ -1,13 +1,18 @@
-import { useState } from 'react'
-import { Dialog,Transition } from '@headlessui/react'
-import cn from "classnames"
+import { useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import cn from "classnames";
 
-const Modal= ({isOpen,closeModal,title="title",children,className="max-w-1800px"}) => {
-
+const Modal = ({
+  isOpen,
+  closeModal,
+  title = "title",
+  children,
+  className = "max-w-1800px",
+}) => {
   return (
     <>
-      <Transition appear show={isOpen} >
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Transition appear show={isOpen}>
+        <Dialog className="relative z-10" onClose={() => {}}>
           <Transition.Child
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -35,11 +40,12 @@ const Modal= ({isOpen,closeModal,title="title",children,className="max-w-1800px"
                     "w-full transform overflow-hidden rounded-[15px] text-left align-middle shadow-xl transition-all bg-white"
                   )}
                 >
-
-                    <div className="px-[26px] py-[15px] flex items-center justify-between gap-x-2 bg-primary">
-                      <h3 className="typography-3 text-white">{title}</h3>
-                      <button onClick={closeModal} className='btn btn-primary'>X</button>
-                    </div>
+                  <div className="px-[26px] py-[15px] flex items-center justify-between gap-x-2 bg-primary">
+                    <h3 className="typography-3 text-white">{title}</h3>
+                    <button onClick={closeModal} className=" text-white px-2">
+                      X
+                    </button>
+                  </div>
 
                   <div className="py-[27px] px-[31px]">{children}</div>
                 </Dialog.Panel>
@@ -49,7 +55,7 @@ const Modal= ({isOpen,closeModal,title="title",children,className="max-w-1800px"
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

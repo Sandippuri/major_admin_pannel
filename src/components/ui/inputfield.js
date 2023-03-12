@@ -5,7 +5,7 @@ const Inputfield = (props) => {
     <div className={props.className}>
       <label
         htmlFor={props.name}
-        className="block mb-2 text-md font-medium text-primary"
+        className="block mb-2 text-sm font-medium text-primary"
       >
         {props.title}
       </label>

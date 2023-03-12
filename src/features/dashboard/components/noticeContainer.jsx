@@ -44,7 +44,7 @@ const Notice = () => {
         <div className="grid grid-cols-2 gap-4   w-full ">
           <div className="flex flex-col bg-white border border-gray-200 rounded-lg shadow-md py-3">
             <h1 className="text-2xl font-medium text-center mb-3">
-              Total Passing Stuents
+              Total Passing Students
             </h1>
             <Doughnutchart />
           </div>
@@ -53,7 +53,7 @@ const Notice = () => {
           </div>
           <div className="col-span-2 w-full p-6 text-gray-900 bg-white border border-gray-200 rounded-lg shadow-md">
             <h1 className="text-2xl font-medium text-center mb-3">
-              Total Passing Stuents
+              Total Passing Students
             </h1>
             <Areachart />
           </div>

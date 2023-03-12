@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useGetAllStudentsQuery } from "../../redux-toolkit/apiSlices/student";
+import {
+  useGetAllStudentsQuery,
+  useGetStudentQuery,
+} from "../../redux-toolkit/apiSlices/student";
 import { useNavigate } from "react-router-dom";
 import Tables from "../../components/table/tables";
 import AddStudentModal from "./components/addStudentModal";
@@ -8,15 +11,25 @@ const StudentList = () => {
   const [addStudentModalOpen, setAddStudentModalOpen] = useState(false);
   // con[st dispatch = useDispatch();
   const { data, isLoading } = useGetAllStudentsQuery();
+  const { singleStudentData = data } = useGetStudentQuery(1);
+  const studentData = data?.value;
+  console.log(singleStudentData);
   const navigate = useNavigate();
   // const data = useSelector()
   console.log(data);
   const columns = [
     { name: "S No.", selector: (row) => row.id, sortable: true },
     { name: "Student name", selector: (row) => row.name, sortable: true },
-    { name: "Roll Number", selector: (row) => row.roll, sortable: true },
-    { name: "Batch", selector: (row) => row.batch, sortable: true },
-    { name: "Department", selector: (row) => row.department, sortable: true },
+    {
+      name: "Date of Birth",
+      selector: (row) => new Date(row.dateOfBirth).toDateString(),
+      sortable: true,
+    },
+    {
+      name: "Citizenship Number",
+      selector: (row) => row.citizenshipNumber,
+      sortable: true,
+    },
   ];
 
   return (
@@ -36,7 +49,7 @@ const StudentList = () => {
           {isLoading && (
             <h1 className="text-4xl text-center text-black">Loading...</h1>
           )}
-          {!!data && <Tables data={data} columns={columns} />}
+          {!!data && <Tables data={studentData} columns={columns} />}
         </div>
       </div>
       <AddStudentModal

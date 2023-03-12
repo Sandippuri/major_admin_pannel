@@ -1,3 +1,4 @@
-import StudentList from './StudentList';
+import StudentList from "./StudentList";
+import StudentDetails from "./StudentDetails";
 
-export {StudentList};
+export { StudentList, StudentDetails };
