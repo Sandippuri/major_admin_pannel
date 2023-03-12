@@ -1,12 +1,31 @@
 import Modal from "../../../components/ui/modal";
-import Formfield from '../../../components/ui/formfield'
-import Textarera from '../../../components/ui/textarera'
+import { useState } from "react";
+import Inputfield from "../../../components/ui/inputfield";
+import Textarera from "../../../components/ui/textarera";
+import { useAddDepartmentMutation } from "../../../redux-toolkit/apiSlices/department";
 import Button from "../../../components/ui/button";
+import { toast } from "react-toastify";
 
-const AddDepartmentModal = ({
-  isOpen,
-  closeModal,
-}) => {
+const AddDepartmentModal = ({ isOpen, closeModal }) => {
+  const [department, setDepartment] = useState(null);
+  const [addDepartment] = useAddDepartmentMutation();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await addDepartment(department);
+      console.log(response);
+      if (response?.error?.status === 400) {
+        toast.error(response?.error?.data?.error);
+      } else {
+        toast.success("Department added successfully");
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -14,13 +33,26 @@ const AddDepartmentModal = ({
       title="Add Department"
       className="w-[30vw]"
     >
-      <form className="text-md">
-      <Formfield className={'col-span-2'} name={"name"} type={"text"} id={"departmentname"} title={"Department Name"} placeholder={"Enter name of department"} required={true} />
-        <Formfield className={'col-span-1'} name={"name"} type={"text"} id={"id"} title={"Department id*"} placeholder={"Enter department id"} required={true} />
-        <Textarera  className={'col-span-3'} name={"description"} type={"text area"} id={"name"} title={"Description"} placeholder={"Descriptions"} required={true} />
-        <div className="flex justify-end gap-4  ">
-        <Button className='bg-gray-900 text-white rounded-md ' buttonText={"Submit"} onClick={()=>{}}/>
-        <Button className='bg-gray-400 text-white rounded-md' buttonText={"Cancel"} onClick={()=>{}}>Cancel</Button>   
+      <form className="text-md" onSubmit={submitHandler}>
+        <label
+          htmlFor="departmentName"
+          className="block mb-2 text-sm font-medium text-primary"
+        >
+          Department Name
+        </label>
+        <input
+          type="text"
+          onChange={(e) =>
+            setDepartment({ ...department, name: e.target.value })
+          }
+          name="departmentName"
+          id="departmentName"
+          className="input-field"
+          placeholder="Enter name of department"
+          required
+        />
+        <div className="flex justify-end gap-4 mt-4  ">
+          <Button className="btn-primary" buttonText={"Submit"} />
         </div>
       </form>
     </Modal>

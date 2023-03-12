@@ -1,29 +1,66 @@
-import React,{useState} from "react";
-import { useGetAllDepartmentsQuery } from "../../redux-toolkit/apiSlices/department";
+import React, { useState } from "react";
+import {
+  useGetAllDepartmentsQuery,
+  useDeleteDepartmentMutation,
+} from "../../redux-toolkit/apiSlices/department";
 import { useNavigate } from "react-router-dom";
-import Tables from "../../components/tables";
+import Tables from "../../components/table/tables";
 import AddDepartmentModal from "./components/addDepartmentModal";
+import EditDepartmentModal from "./components/editDepartmentModal";
+import DeleteModal from "./components/deleteModal";
+import { toast } from "react-toastify";
 
 const DepartmentList = () => {
+  const [departmentId, setDepartmentId] = useState();
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [addDepartmentModalOpen, setAddDepartmentModalOpen] = useState(false);
-  // con[st dispatch = useDispatch();
+  const [editDepartmentModalOpen, setEditDepartmentModalOpen] = useState(false);
+  const [deleteDepartment] = useDeleteDepartmentMutation();
   const { data, isLoading } = useGetAllDepartmentsQuery();
   const navigate = useNavigate();
-  // const data = useSelector()
-  console.log(data);
+  const departmentData = data?.value;
   const columns = [
-    { name: "S No.", selector: (row) => row.id, sortable: true },
+    { name: "S No.", selector: (row) => row.ID, sortable: true },
     { name: "Department name", selector: (row) => row.name, sortable: true },
-    { name: "Description", selector: (row) => row.description, sortable: true },
+    {
+      name: "Actions",
+      cell: (row) => (
+        <div className="flex gap-2">
+          <button
+            className="bg-primary hover:bg-green-500 p-1 rounded-sm text-white"
+            onClick={() => {
+              setDepartmentId(row.ID);
+              setEditDepartmentModalOpen(true);
+            }}
+          >
+            Edit
+          </button>
+          <button
+            id={row.ID}
+            onClick={() => {
+              setDepartmentId(row.ID);
+              setDeleteModalOpen(true);
+            }}
+            // onClick={() => deleteDepartment(row.ID)}
+            className="bg-primary hover:bg-red-500 p-1 rounded-sm text-white"
+          >
+            Delete
+          </button>
+        </div>
+      ),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
+    },
   ];
 
   return (
     <>
-      <div className="flex flex-col w-full mx-5 my-5">
-        <div className="flex w-full justify-between mb-3">
+      <div className="flex flex-col mx-5 my-5">
+        <div className="flex justify-between px-4 py-2">
           <h2 className="text-xl font-bold">Department Details </h2>
           <button
-            className="bg-gray-900 text-white rounded-md px-4 py-2"
+            className="btn btn-primary"
             onClick={() => setAddDepartmentModalOpen(true)}
           >
             + Add Department
@@ -33,12 +70,35 @@ const DepartmentList = () => {
           {isLoading && (
             <h1 className="text-4xl text-center text-black">Loading...</h1>
           )}
-          {!!data && <Tables data={data} columns={columns} />}
+          {!!data && <Tables data={departmentData} columns={columns} />}
         </div>
       </div>
       <AddDepartmentModal
         isOpen={addDepartmentModalOpen}
         closeModal={() => setAddDepartmentModalOpen(false)}
+      />
+      <EditDepartmentModal
+        isOpen={editDepartmentModalOpen}
+        closeModal={() => setEditDepartmentModalOpen(false)}
+        departmentId={departmentId}
+      />
+      <DeleteModal
+        isOpen={deleteModalOpen}
+        closeModal={() => setDeleteModalOpen(false)}
+        onClick={async () => {
+          try {
+            const response = await deleteDepartment(departmentId);
+            console.log(response);
+            if (response?.error?.status === 400) {
+              toast.error(response?.error?.data?.error);
+            } else {
+              toast.success("Department deleted successfully");
+              setDeleteModalOpen(false);
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }}
       />
     </>
   );

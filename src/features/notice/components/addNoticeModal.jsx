@@ -1,5 +1,5 @@
 import Modal from "../../../components/ui/modal";
-import Formfield from "../../../components/ui/formfield";
+import Inputfield from "../../../components/ui/inputfield";
 import Textarera from "../../../components/ui/textarera";
 import Button from "../../../components/ui/button";
 
@@ -8,12 +8,11 @@ const AddNoticeModal = ({ isOpen, closeModal }) => {
     <Modal
       isOpen={isOpen}
       closeModal={closeModal}
-      title="Add College"
+      title="Add Notice"
       className="w-[30vw]"
     >
       <form className="text-md">
-        <Formfield
-          className={"col-span-1"}
+        <Inputfield
           name={"title"}
           type={"text"}
           id={"name"}
@@ -21,8 +20,7 @@ const AddNoticeModal = ({ isOpen, closeModal }) => {
           placeholder={"Enter the notice"}
           required={true}
         />
-        <Formfield
-          className={"col-span-1"}
+        <Inputfield
           name={"date"}
           type={"date"}
           id={"id"}
@@ -32,7 +30,6 @@ const AddNoticeModal = ({ isOpen, closeModal }) => {
         />
 
         <Textarera
-          className={"col-span-3"}
           name={"description"}
           type={"text area"}
           id={"name"}
@@ -42,17 +39,11 @@ const AddNoticeModal = ({ isOpen, closeModal }) => {
         />
         <div className="flex justify-end gap-4  ">
           <Button
-            className="bg-gray-900 text-white rounded-md "
+            className="btn-primary"
             buttonText={"Submit"}
             onClick={() => {}}
           />
-          <Button
-            className="bg-gray-400 text-white rounded-md"
-            buttonText={"Cancel"}
-            onClick={() => {}}
-          >
-            Cancel
-          </Button>
+
         </div>
       </form>
     </Modal>

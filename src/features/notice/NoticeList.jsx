@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useGetAllNoticesQuery } from "../../redux-toolkit/apiSlices/notice";
 import { useNavigate } from "react-router-dom";
-import Tables from "../../components/tables";
-import AddDepartmentModal from "../notice/components/addNoticeModal"
+import Tables from "../../components/table/tables";
+import AddNoticeModal from "../notice/components/addNoticeModal"
 
 const NoticeList = () => {
   const [addNoticeModalOpen, setAddNoticeModalOpen] = useState(false);
@@ -20,11 +20,11 @@ const NoticeList = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full mx-5 my-5">
-        <div className="flex w-full justify-between mb-3">
+      <div className="flex flex-col mx-5 my-5">
+        <div className="flex w-full justify-between px-4 py-2">
           <h2 className="text-xl font-bold">Notice </h2>
           <button
-            className="bg-gray-900 text-white rounded-md px-4 py-2"
+            className="btn btn-primary"
             onClick={() => setAddNoticeModalOpen(true)}
           >
             + Add Notice
@@ -38,7 +38,7 @@ const NoticeList = () => {
           {!!data && <Tables data={data} columns={columns} />}
         </div>
       </div>
-      <AddDepartmentModal
+      <AddNoticeModal
         isOpen={addNoticeModalOpen}
         closeModal={() => setAddNoticeModalOpen(false)}
       />

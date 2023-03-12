@@ -1,12 +1,11 @@
-import {StudentList} from "../../features/student";
+import { StudentList, StudentDetails } from "../../features/student";
 
-const Student = () => {
-    return (
-      <>
-        <StudentList />
-      </>
-    );
-  };
-  
-  export default Student;
-  
+export const Student = () => {
+  return (
+    <>
+      <StudentList />
+    </>
+  );
+};
+
+export { StudentDetails };

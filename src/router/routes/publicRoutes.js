@@ -1,13 +1,19 @@
-import DashboadLayout from "../../components/layout/DashboadLayout";
-import Login from "../../features/authentication/Login"
+import Login from "../../features/authentication/Login";
+import store from "../../redux-toolkit";
+import { redirect } from "react-router-dom";
 
 const publicRoutes = [
-    {
-      element: <DashboadLayout />,
-      children: [
-        { path: "/login", element: <Login/> },
-    ],
-    }
-  ];
+  {
+    loader: () => {
+      const { user } = store.getState();
+      if (user.isUserAuthenticated) {
+        throw redirect("/");
+      }
+
+      return null;
+    },
+    children: [{ path: "/login", element: <Login /> }],
+  },
+];
 
 export default publicRoutes;
