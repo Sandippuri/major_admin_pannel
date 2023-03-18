@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import "./style.css";
 
@@ -16,15 +17,7 @@ const style = {
 };
 
 const Tables = (props) => {
-  // const data = props.data;
-  // const [filteredData, setFilteredData] = useState(data);
   const [filterText, setFilterText] = useState("");
-  // const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-  // const [search, setSearch] = useState("");
-
-  // useEffect(() => {
-  //   setFilteredData(data.filter(item => item.name.toLowerCase().includes(search.toLowerCase())));
-  // }, [search])
   const filteredItems = props.data.filter(
     (item) =>
       JSON.stringify(item).toLowerCase().indexOf(filterText.toLowerCase()) !==

@@ -56,7 +56,7 @@ const EditDepartmentModal = ({ isOpen, closeModal, departmentId }) => {
         </label>
         <input
           type="text"
-          value={editedData?.name}
+          value={editedData?.name || " "}
           onChange={(e) =>
             setEditedData({ ...editedData, name: e.target.value })
           }

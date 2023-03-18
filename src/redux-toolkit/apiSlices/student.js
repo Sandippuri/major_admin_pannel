@@ -22,7 +22,7 @@ export const studentApi = createApi({
         invalidatesTags: ["Student"],
       }),
     }),
-    getStudent: builder.query({
+    getSingleStudent: builder.query({
       query: (id) => `/students/${id}`,
       providesTags: ["Student"],
     }),
@@ -31,6 +31,6 @@ export const studentApi = createApi({
 
 export const {
   useGetAllStudentsQuery,
-  useGetStudentQuery,
+  useGetSingleStudentQuery,
   useAddStudentMutation,
 } = studentApi;

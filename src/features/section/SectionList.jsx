@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AddSectionModal from "./components/addSectionModal";
 import { useNavigate } from "react-router-dom";
 import { useGetAllSectionsQuery } from "../../redux-toolkit/apiSlices/section";
+import { MdOutlineDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import Tables from "../../components/table/tables";
 
 const SectionList = () => {
@@ -16,6 +17,36 @@ const SectionList = () => {
     { name: "S No.", selector: (row) => row.id, sortable: true },
     { name: "Section Name", selector: (row) => row.name, sortable: true },
     { name: "Batch", selector: (row) => row.name, sortable: true },
+    {
+      name: "Actions",
+      cell: (row) => (
+        <div className="flex gap-2">
+          <button
+            className="text-primary hover:text-green-500 "
+            onClick={() => {
+              // setSectionID(row.id);
+              // setEditSectionModalOpen(true);
+            }}
+          >
+            <MdOutlineModeEditOutline size={24} />
+          </button>
+          <button
+            id={row.ID}
+            onClick={() => {
+              // setSectionID(row.ID);
+              // setDeleteModalOpen(true);
+            }}
+            // onClick={() => deleteDepartment(row.ID)}
+            className="text-primary hover:text-red-500"
+          >
+            <MdOutlineDelete size={24} />
+          </button>
+        </div>
+      ),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
+    },
   ];
 
   return (

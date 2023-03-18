@@ -1,6 +1,9 @@
-import { CollegeDepartmentList } from "../../features/collegeDepartment";
+import {
+  CollegeDepartmentList,
+  CollegeDepartmentDetails,
+} from "../../features/collegeDepartment";
 
-const CollegeDepartment = () => {
+export const CollegeDepartment = () => {
   return (
     <>
       <CollegeDepartmentList />
@@ -8,4 +11,4 @@ const CollegeDepartment = () => {
   );
 };
 
-export default CollegeDepartment;
+export { CollegeDepartmentDetails };

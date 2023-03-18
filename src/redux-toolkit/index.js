@@ -8,11 +8,11 @@ import { resultApi } from "./apiSlices/result";
 import { authApi } from "./apiSlices/auth";
 import { batchApi } from "./apiSlices/batch";
 import { sectionApi } from "./apiSlices/section";
-import userSlice from "./slices/userSlice";
 import { programmeApi } from "./apiSlices/programme";
 import { collegeDepartmentApi } from "./apiSlices/collegeDepartment";
 import { collegeProgrammeApi } from "./apiSlices/collegeProgramme";
 import { subjectApi } from "./apiSlices/subject";
+import userSlice from "./slices/userSlice";
 
 const middleware = [
   collegeApi.middleware,

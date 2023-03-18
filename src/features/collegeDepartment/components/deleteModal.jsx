@@ -6,11 +6,13 @@ const DeleteModal = ({ isOpen, closeModal, ...rest }) => {
     <Modal
       isOpen={isOpen}
       closeModal={closeModal}
-      title="Delete Department"
+      title="Delete College"
       className="w-fit"
     >
       <div className="flex flex-col gap-4">
-        <h3 className="text-lg">Do you really want to delete this Batch?</h3>
+        <h3 className="text-lg">
+          Do you really want to delete this Department?
+        </h3>
         <button
           className="btn-primary w-fit self-end p-2 rounded-sm hover:bg-red-500"
           {...rest}

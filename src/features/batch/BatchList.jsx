@@ -10,6 +10,7 @@ import DeleteModal from "./components/deleteModal";
 import EditBatchModal from "./components/editBatchModal";
 import AddBatchModal from "./components/addBatchModal";
 import Card from "../../components/ui/card";
+import { MdOutlineDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const BatchList = () => {
@@ -25,30 +26,30 @@ const BatchList = () => {
   console.log(data);
   const batchData = data?.value;
   const columns = [
-    { name: "S No.", selector: (row) => row.id, sortable: true },
+    { name: "S No.", selector: (row) => row.ID, sortable: true },
     { name: "Batch", selector: (row) => row.year, sortable: true },
     {
       name: "Actions",
       cell: (row) => (
         <div className="flex gap-2">
           <button
-            className="bg-primary hover:bg-green-500 p-1 rounded-sm text-white"
+            className="text-primary hover:text-green-500"
             onClick={() => {
-              setBatchId(row.id);
+              setBatchId(row.ID);
               setEditBatchModalOpen(true);
             }}
           >
-            Edit
+            <MdOutlineModeEditOutline size={24} />
           </button>
           <button
             onClick={() => {
-              setBatchId(row.id);
+              setBatchId(row.ID);
               setDeleteModalOpen(true);
             }}
             // onClick={() => deleteDepartment(row.ID)}
-            className="bg-primary hover:bg-red-500 p-1 rounded-sm text-white"
+            className="text-primary hover:text-red-500 "
           >
-            Delete
+            <MdOutlineDelete size={24} />
           </button>
         </div>
       ),
