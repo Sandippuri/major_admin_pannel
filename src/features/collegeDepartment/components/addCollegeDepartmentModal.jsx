@@ -1,32 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../../../components/ui/modal";
-import SelectField from "../../../components/ui/selectfield";
-import Textarera from "../../../components/ui/textarera";
 import Button from "../../../components/ui/button";
 import { useGetAllDepartmentsQuery } from "../../../redux-toolkit/apiSlices/department";
-import { useGetAllProgrammesQuery } from "../../../redux-toolkit/apiSlices/programme";
+import { useAddCollegeDepartmentMutation } from "../../../redux-toolkit/apiSlices/collegeDepartment";
 import {
   useGetAllCollegesQuery,
   useAddCollegeMutation,
 } from "../../../redux-toolkit/apiSlices/college";
+import { toast } from "react-toastify";
 
 const AddCollegeDepartmentModal = ({ isOpen, closeModal }) => {
-  const [college, setCollege] = useState({});
+  const [collegeDepartment, setCollegeDepartment] = useState({});
+  const [selectedDepartmentIds, setSelectedDepartmentIds] = useState([]);
   const { data: collegeData } = useGetAllCollegesQuery();
   const { data: departmentData } = useGetAllDepartmentsQuery();
-  const [addCollege, response] = useAddCollegeMutation();
-  console.log(collegeData);
+  const [addCollegeDepartment] = useAddCollegeDepartmentMutation();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const { name, address } = e.target.elements;
-    setCollege({
-      name: name.value,
-      location: address.value,
-    });
-    console.log(college);
-    const response = await addCollege(college);
-    console.log(response);
+    try {
+      const response = await addCollegeDepartment({
+        ...collegeDepartment,
+        department_ids: selectedDepartmentIds,
+      });
+      console.log(response);
+      if (response?.error?.status === 400) {
+        toast.error(response?.error?.data?.error);
+      } else {
+        toast.success("Campus Deaprtment added successfully");
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    }
     // closeModal();
   };
   return (
@@ -37,22 +43,32 @@ const AddCollegeDepartmentModal = ({ isOpen, closeModal }) => {
       className="w-[30vw]"
     >
       <form className="text-md" onSubmit={submitHandler}>
-        <SelectField
-          name={"college"}
-          id={"college"}
-          title={"College"}
-          required={true}
-          className={"mb-2"}
-          options={collegeData?.value.map((college) => {
-            return {
-              value: college.id,
-              label: college.name,
-            };
-          })}
-        />
+        <label
+          htmlFor="college"
+          className="block mb-2 text-sm font-medium text-primary"
+        >
+          College
+        </label>
+        <select
+          name="college"
+          className="input-field"
+          onChange={(e) => {
+            setCollegeDepartment({
+              ...collegeDepartment,
+              campus_id: Number(e.target.value),
+            });
+          }}
+        >
+          <option value="">Select College</option>
+          {collegeData?.value.map((college) => (
+            <option key={college.ID} value={Number(college.ID)}>
+              {college.name}
+            </option>
+          ))}
+        </select>
         <label
           htmlFor="campusDepartment"
-          className="block my-1 text-sm font-medium text-primary"
+          className="block mt-4 mb-1 text-sm font-medium text-primary"
         >
           Select Department
         </label>
@@ -60,7 +76,30 @@ const AddCollegeDepartmentModal = ({ isOpen, closeModal }) => {
           {departmentData?.value.map((department) => {
             return (
               <label key={department.ID}>
-                <input className="m-1" type="checkbox" />
+                <input
+                  className="m-1"
+                  type="checkbox"
+                  onChange={(e) => {
+                    // add to list
+                    const { value, checked } = e.target;
+                    console.log(department.ID, checked);
+                    if (checked) {
+                      console.log("checked");
+                      setSelectedDepartmentIds([
+                        ...selectedDepartmentIds,
+                        department.ID,
+                      ]);
+                    } else {
+                      // remove from list
+                      console.log("unchecked");
+                      setSelectedDepartmentIds(
+                        selectedDepartmentIds.filter(
+                          (id) => id !== department.ID
+                        )
+                      );
+                    }
+                  }}
+                />
                 {department.name}
               </label>
             );
@@ -73,5 +112,4 @@ const AddCollegeDepartmentModal = ({ isOpen, closeModal }) => {
     </Modal>
   );
 };
-
 export default AddCollegeDepartmentModal;

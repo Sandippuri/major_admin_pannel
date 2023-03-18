@@ -42,7 +42,7 @@ const AddBatchModal = ({ isOpen, closeModal }) => {
         </label>
         <input
           type="text"
-          onChange={(e) => setBatch({ ...batch, year: e.target.value })}
+          onChange={(e) => setBatch({ ...batch, year: Number(e.target.value) })}
           name="batchYear"
           id="batchYear"
           className="input-field"

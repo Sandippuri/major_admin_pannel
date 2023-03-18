@@ -5,7 +5,6 @@ import { loginUser } from "../../redux-toolkit/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ToastMessage } from "../../components/ui/toaster";
 
 const Login = () => {
   const [login, { isError, error }] = useLoginMutation();

@@ -11,6 +11,7 @@ import AddCollegeModal from "./components/addCollegeModal";
 import EditCollegeModal from "./components/editCollegeModal";
 import Card from "../../components/ui/card";
 import { toast } from "react-toastify";
+import { MdOutlineDelete, MdOutlineModeEditOutline } from "react-icons/md";
 
 const CollegeList = () => {
   const [collegeId, setCollegeId] = useState();
@@ -20,6 +21,9 @@ const CollegeList = () => {
   const [deleteCollege] = useDeleteCollegeMutation();
   const { data, isLoading } = useGetAllCollegesQuery();
   const campusData = data?.value;
+  const navigate = useNavigate();
+
+  const rowId = useSelector((state) => state.rowId);
   const columns = [
     { name: "S No.", selector: (row) => row.ID, sortable: true },
     { name: "College name", selector: (row) => row.name, sortable: true },
@@ -29,13 +33,13 @@ const CollegeList = () => {
       cell: (row) => (
         <div className="flex gap-2">
           <button
-            className="bg-primary hover:bg-green-500 p-1 rounded-sm text-white"
+            className="text-primary hover:text-green-500"
             onClick={() => {
               setCollegeId(row.ID);
               setEditCollegeModalOpen(true);
             }}
           >
-            Edit
+            <MdOutlineModeEditOutline size={24} />
           </button>
           <button
             id={row.ID}
@@ -44,9 +48,9 @@ const CollegeList = () => {
               setDeleteModalOpen(true);
             }}
             // onClick={() => deleteCollege(row.ID)}
-            className="bg-primary hover:bg-red-500 p-1 rounded-sm text-white"
+            className="text-primary hover:text-red-500"
           >
-            Delete
+            <MdOutlineDelete size={24} />
           </button>
         </div>
       ),
@@ -56,6 +60,10 @@ const CollegeList = () => {
     },
   ];
 
+  const onRowClicked = (id) => {
+    // navigate(`/student/${row.id}`);
+    console.log("this is" + id);
+  };
   return (
     <>
       <div className="flex flex-col mx-5 my-5">
@@ -76,20 +84,7 @@ const CollegeList = () => {
           {isLoading && (
             <h1 className="text-4xl text-center text-black">Loading...</h1>
           )}
-          {!!data && (
-            <Tables
-              data={campusData}
-              columns={columns}
-              // buttonComponent={
-              //   <button
-              //     className="btn btn-primary w-full"
-              //     onClick={() => setAddCollegeModalOpen(true)}
-              //   >
-              //     + Add college
-              //   </button>
-              // }
-            />
-          )}
+          {!!data && <Tables data={campusData} columns={columns} />}
         </div>
       </div>
       <AddCollegeModal

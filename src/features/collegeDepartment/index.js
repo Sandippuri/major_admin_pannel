@@ -1,3 +1,4 @@
 import CollegeDepartmentList from "./CollegeDepartmentList";
+import CollegeDepartmentDetails from "./CollegeDepartmentDetails";
 
-export { CollegeDepartmentList };
+export { CollegeDepartmentList, CollegeDepartmentDetails };

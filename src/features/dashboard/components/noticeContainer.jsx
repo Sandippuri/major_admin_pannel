@@ -28,12 +28,12 @@ const Notice = () => {
         </div>
         <div className="">
           <div className="h-[80vh] flex flex-col overflow-scroll scrollbar-hide ">
-            {data?.map((notice, key) => {
+            {data?.value?.map((notice) => {
               return (
                 <Noticeitem
-                  id={key}
-                  title={notice.description}
-                  date={notice.date}
+                  key={notice.ID}
+                  title={notice.title}
+                  date={new Date(notice.CreatedAt).toDateString()}
                 />
               );
             })}
@@ -53,7 +53,7 @@ const Notice = () => {
           </div>
           <div className="col-span-2 w-full p-6 text-gray-900 bg-white border border-gray-200 rounded-lg shadow-md">
             <h1 className="text-2xl font-medium text-center mb-3">
-              Total Passing Students
+              Top Students in college
             </h1>
             <Areachart />
           </div>

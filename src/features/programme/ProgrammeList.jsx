@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import DeleteModal from "./components/deleteModal";
 import AddProgrammeModal from "./components/addProgrammeModal";
 import EditProgrammeModal from "./components/editProgrammeModal";
+import { MdOutlineDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import Card from "../../components/ui/card";
 import { toast } from "react-toastify";
 
@@ -23,7 +24,7 @@ const ProgrammeList = () => {
   const navigate = useNavigate();
   // const data = useSelector()
   // console.log(data);
-  const campusData = data?.value;
+  const programmeData = data?.value;
   const columns = [
     { name: "S No.", selector: (row) => row.ID, sortable: true },
     { name: "Name", selector: (row) => row.name, sortable: true },
@@ -38,13 +39,13 @@ const ProgrammeList = () => {
       cell: (row) => (
         <div className="flex gap-2">
           <button
-            className="bg-primary hover:bg-green-500 p-1 rounded-sm text-white"
+            className="text-primary hover:text-green-500"
             onClick={() => {
               setProgrammeId(row.ID);
               setEditProgrammeModalOpen(true);
             }}
           >
-            Edit
+            <MdOutlineModeEditOutline size={24} />
           </button>
           <button
             id={row.ID}
@@ -53,9 +54,9 @@ const ProgrammeList = () => {
               setDeleteModalOpen(true);
             }}
             // onClick={() => deleteDepartment(row.ID)}
-            className="bg-primary hover:bg-red-500 p-1 rounded-sm text-white"
+            className="text-primary hover:text-red-500"
           >
-            Delete
+            <MdOutlineDelete size={24} />
           </button>
         </div>
       ),
@@ -86,7 +87,7 @@ const ProgrammeList = () => {
           {isLoading && (
             <h1 className="text-4xl text-center text-black">Loading...</h1>
           )}
-          {!!data && <Tables data={campusData} columns={columns} />}
+          {!!data && <Tables data={programmeData} columns={columns} />}
         </div>
       </div>
       <AddProgrammeModal
@@ -96,7 +97,7 @@ const ProgrammeList = () => {
       <EditProgrammeModal
         isOpen={editProgrammeModalOpen}
         closeModal={() => setEditProgrammeModalOpen(false)}
-        departmentId={programmeId}
+        programmeId={programmeId}
       />
       <DeleteModal
         isOpen={deleteModalOpen}

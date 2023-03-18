@@ -1,26 +1,29 @@
 import { useState } from "react";
 import Modal from "../../../components/ui/modal";
 import InputField from "../../../components/ui/inputfield";
-import Checkbox from "../../../components/ui/checkbox";
-import Textarera from "../../../components/ui/textarera";
 import Button from "../../../components/ui/button";
-import { useAddCollegeMutation } from "../../../redux-toolkit/apiSlices/college";
+import { useAddSubjectMutation } from "../../../redux-toolkit/apiSlices/subject";
+import { toast } from "react-toastify";
 
 const AddSubjectModal = ({ isOpen, closeModal }) => {
-  const [college, setCollege] = useState({});
-  const [addCollege, response] = useAddCollegeMutation();
+  const [subject, setSubject] = useState(null);
+  const [addSubject] = useAddSubjectMutation();
   const [practical, setPractical] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const { name, address } = e.target.elements;
-    setCollege({
-      name: name.value,
-      location: address.value,
-    });
-    console.log(college);
-    const response = await addCollege(college);
-    console.log(response);
+    try {
+      const response = await addSubject(subject);
+      console.log(response);
+      if (response?.error?.status === 400) {
+        toast.error(response?.error?.data?.error);
+      } else {
+        toast.success("Subject added successfully");
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    }
     // closeModal();
   };
   return (
@@ -30,7 +33,7 @@ const AddSubjectModal = ({ isOpen, closeModal }) => {
       title="Add Subject"
       className="w-[30vw]"
     >
-      <form className="text-md" onSubmit={submitHandler}>
+      <form className=" flex flex-col text-md gap-1" onSubmit={submitHandler}>
         <InputField
           name={"courseID"}
           type={"text"}
@@ -39,6 +42,9 @@ const AddSubjectModal = ({ isOpen, closeModal }) => {
           placeholder={"Unique Course ID"}
           required={true}
           className={"m-1"}
+          onChange={(e) => {
+            setSubject({ ...subject, courseId: e.target.value });
+          }}
         />
         <InputField
           name={"courseName"}
@@ -48,26 +54,63 @@ const AddSubjectModal = ({ isOpen, closeModal }) => {
           placeholder={"E.G. Computer Networks"}
           required={true}
           className={"m-1"}
+          onChange={(e) => {
+            setSubject({ ...subject, fullName: e.target.value });
+          }}
         />
         <InputField
-          name={"marks"}
+          name={"theoryMarks"}
           type={"text"}
-          id={"marks"}
-          title={"Full Marks"}
+          id={"theoryMarks"}
+          title={"Theory Marks"}
           // placeholder={"100"}
           required={true}
           className={"m-1"}
+          onChange={(e) => {
+            setSubject({ ...subject, theory_marks: Number(e.target.value) });
+          }}
         />
         <InputField
-          name={"passMarks"}
+          name={"assessmentMarks"}
           type={"text"}
-          id={"passMarks"}
-          title={"Pass Marks"}
+          id={"assessmentMarks"}
+          title={"Assessment Marks"}
           // placeholder={"100"}
           required={true}
           className={"m-1"}
+          onChange={(e) => {
+            setSubject({
+              ...subject,
+              assessment_marks: Number(e.target.value),
+            });
+          }}
         />
-        <Checkbox title="Practical" onClick={() => setPractical(!practical)} />
+        <InputField
+          name={"passpercent"}
+          type={"text"}
+          id={"passpercent"}
+          title={"Pass Percentage"}
+          // placeholder={"100"}
+          required={true}
+          className={"m-1"}
+          onChange={(e) => {
+            setSubject({
+              ...subject,
+              passPercent: Number(e.target.value),
+            });
+          }}
+        />
+        <label className=" text-sm font-medium text-primary flex gap-1 ml-1 ">
+          <input
+            className=""
+            type="checkbox"
+            onChange={(e) => {
+              e.target.checked ? setPractical(true) : setPractical(false);
+            }}
+            // onClick={() => setPractical(!practical)}
+          />
+          <p>Practical</p>
+        </label>
         {practical && (
           <>
             <InputField
@@ -78,15 +121,33 @@ const AddSubjectModal = ({ isOpen, closeModal }) => {
               // placeholder={"100"}
               required={true}
               className={"m-1"}
+              onChange={(e) => {
+                setSubject({
+                  ...subject,
+                  practical: {
+                    ...practical,
+                    marks: Number(e.target.value),
+                  },
+                });
+              }}
             />
             <InputField
-              name={"practicalPassMarks"}
+              name={"practicalPassPercentage"}
               type={"text"}
-              id={"practicalPassMarks"}
-              title={"Practical Pass Marks"}
+              id={"practicalPassPercentage"}
+              title={"Practical Pass Percentage"}
               // placeholder={"100"}
               required={true}
               className={"m-1"}
+              onChange={(e) => {
+                setSubject({
+                  ...subject,
+                  practical: {
+                    ...practical,
+                    passPercent: Number(e.target.value),
+                  },
+                });
+              }}
             />
           </>
         )}

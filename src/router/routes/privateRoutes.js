@@ -1,7 +1,10 @@
 import DashboadLayout from "../../components/layout/DashboadLayout";
 import Home from "../../pages";
 import College from "../../pages/college";
-import CollegeDepartment from "../../pages/collegeDepartment";
+import {
+  CollegeDepartment,
+  CollegeDepartmentDetails,
+} from "../../pages/collegeDepartment";
 import { Student, StudentDetails } from "../../pages/student";
 import Teacher from "../../pages/teacher";
 import Department from "../../pages/department";
@@ -31,6 +34,10 @@ const privateRoutes = [
       { path: "/", element: <Home /> },
       { path: "/colleges", element: <College /> },
       { path: "/college_department", element: <CollegeDepartment /> },
+      {
+        path: "/college_department/:collegeDepartmentId",
+        element: <CollegeDepartmentDetails />,
+      },
       { path: "/students", element: <Student /> },
       { path: "students/:studentID", element: <StudentDetails /> },
       { path: "/teachers", element: <Teacher /> },

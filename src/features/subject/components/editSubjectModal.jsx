@@ -10,7 +10,7 @@ import {
 import Button from "../../../components/ui/button";
 import { toast } from "react-toastify";
 
-const EditProgrammeModal = ({ isOpen, closeModal, programmeId }) => {
+const EditSubjectModal = ({ isOpen, closeModal, programmeId }) => {
   const { data: departmentData } = useGetAllDepartmentsQuery();
   const { data: singleProgramme } = useGetSingleProgrammeQuery(programmeId);
   const [editProgramme] = useEditProgrammeMutation();
@@ -37,7 +37,7 @@ const EditProgrammeModal = ({ isOpen, closeModal, programmeId }) => {
       if (response?.error?.status === 400) {
         toast.error(response?.error?.data?.error);
       } else {
-        toast.success("Programme Edited successfully");
+        toast.success("Subject Edited successfully");
         closeModal();
       }
     } catch (error) {
@@ -49,7 +49,7 @@ const EditProgrammeModal = ({ isOpen, closeModal, programmeId }) => {
     <Modal
       isOpen={isOpen}
       closeModal={closeModal}
-      title="Edit Programme"
+      title="Edit Subject"
       className="w-[30vw]"
     >
       <form className="text-md" onSubmit={submitHandler}>
@@ -122,4 +122,4 @@ const EditProgrammeModal = ({ isOpen, closeModal, programmeId }) => {
   );
 };
 
-export default EditProgrammeModal;
+export default EditSubjectModal;

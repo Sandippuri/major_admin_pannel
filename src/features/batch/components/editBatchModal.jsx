@@ -58,7 +58,7 @@ const EditBatchModal = ({ isOpen, closeModal, batchId }) => {
           type="text"
           value={editedData?.year}
           onChange={(e) =>
-            setEditedData({ ...editedData, year: e.target.value })
+            setEditedData({ ...editedData, year: Number(e.target.value) })
           }
           name="batchYear"
           id="batchYear"

@@ -5,20 +5,20 @@ export const batchApi = createApi({
   reducerPath: "batchApi",
   tagTypes: ["Batch"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://student.timalsinasagar.com.np",
+    baseUrl: "http://campus.timalsinasagar.com.np",
   }),
   endpoints: (builder) => ({
     getAllBatches: builder.query({
-      query: () => `/batches`,
+      query: () => `/batch`,
       providesTags: ["Batch"],
     }),
     getSingleBatch: builder.query({
-      query: (id) => `/batches/${id}`,
+      query: (id) => `/batch/${id}`,
       providesTags: ["Batch"],
     }),
     addBatch: builder.mutation({
       query: (batch) => ({
-        url: `/batches/`,
+        url: `/batch/`,
         method: "POST",
         body: batch,
         headers: {
@@ -31,7 +31,7 @@ export const batchApi = createApi({
     }),
     editBatch: builder.mutation({
       query: ({ ID, ...rest }) => ({
-        url: `/batches/${ID}`,
+        url: `/batch/${ID}`,
         method: "PATCH",
         body: rest,
         headers: {
@@ -44,7 +44,7 @@ export const batchApi = createApi({
     }),
     deleteBatch: builder.mutation({
       query: (id) => ({
-        url: `/batches/${id}`,
+        url: `/batch/${id}`,
         method: "DELETE",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
