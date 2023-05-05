@@ -1,6 +1,7 @@
 import {
   CollegeDepartmentList,
   CollegeDepartmentDetails,
+  DepartmentProgramDetails,
 } from "../../features/collegeDepartment";
 
 export const CollegeDepartment = () => {
@@ -11,4 +12,4 @@ export const CollegeDepartment = () => {
   );
 };
 
-export { CollegeDepartmentDetails };
+export { CollegeDepartmentDetails, DepartmentProgramDetails };

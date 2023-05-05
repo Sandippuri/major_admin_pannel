@@ -1,15 +1,12 @@
 import { useState } from "react";
 import Modal from "../../../components/ui/modal";
-import InputField from "../../../components/ui/inputfield";
-import SelectField from "../../../components/ui/selectfield";
-import Textarera from "../../../components/ui/textarera";
 import Button from "../../../components/ui/button";
 import { useAddBatchMutation } from "../../../redux-toolkit/apiSlices/batch";
 import { toast } from "react-toastify";
 
 const AddBatchModal = ({ isOpen, closeModal }) => {
   const [batch, setBatch] = useState({});
-  const [addBatch, response] = useAddBatchMutation();
+  const [addBatch] = useAddBatchMutation();
 
   const submitHandler = async (e) => {
     e.preventDefault();

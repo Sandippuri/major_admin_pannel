@@ -6,7 +6,6 @@ import Tables from "../../components/table/tables";
 import { useNavigate } from "react-router-dom";
 import AddCollegeProgrammeModal from "./components/addCollegeProgrammeModal";
 import Card from "../../components/ui/card";
-import groupById from "../../utils/groupById";
 
 const CollegeProgrammeList = () => {
   // const dispatch = useDispatch();

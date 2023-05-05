@@ -3,8 +3,11 @@ import { ListItem } from "../ui/listitems";
 import cn from "classnames";
 import superAdminContent from "./superAdminContent";
 import adminContent from "./adminContent";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = ({ className }) => {
+  const location = useLocation();
+  console.log(location.pathname);
   return (
     <aside className={cn(className, " bg-primary")}>
       {superAdminContent.map((content, key) => {
@@ -23,7 +26,9 @@ const Sidebar = ({ className }) => {
                   listTitle={items.name}
                   navigate={items.path}
                   key={key}
-                  className="hover:bg-dark hover:rounded-md"
+                  className={`hover:bg-blue-500 ${
+                    location.pathname == items.path ? "bg-dark" : ""
+                  }  hover:rounded-sm`}
                 />
               );
             })}

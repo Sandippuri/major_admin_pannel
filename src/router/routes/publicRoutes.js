@@ -7,9 +7,8 @@ const publicRoutes = [
     loader: () => {
       const { user } = store.getState();
       if (user.isUserAuthenticated) {
-        throw redirect("/");
+        throw redirect("/colleges");
       }
-
       return null;
     },
     children: [{ path: "/login", element: <Login /> }],

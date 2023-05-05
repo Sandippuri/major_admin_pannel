@@ -1,30 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
 import {
   useGetAllBatchesQuery,
   useDeleteBatchMutation,
 } from "../../redux-toolkit/apiSlices/batch";
 import Tables from "../../components/table/tables";
-import { useNavigate } from "react-router-dom";
 import DeleteModal from "./components/deleteModal";
 import EditBatchModal from "./components/editBatchModal";
 import AddBatchModal from "./components/addBatchModal";
-import Card from "../../components/ui/card";
 import { MdOutlineDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import { toast } from "react-toastify";
+import { getAuthToken } from "../../utils/auth";
 
 const BatchList = () => {
-  // const dispatch = useDispatch();
   const [batchId, setBatchId] = useState();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editBatchModalOpen, setEditBatchModalOpen] = useState(false);
   const [addBatchModalOpen, setAddBatchModalOpen] = useState(false);
   const { data, isLoading } = useGetAllBatchesQuery();
   const [deleteBatch] = useDeleteBatchMutation();
-  const navigate = useNavigate();
-  // const data = useSelector()
-  console.log(data);
   const batchData = data?.value;
+  const token = getAuthToken();
+  console.log(token);
+
   const columns = [
     { name: "S No.", selector: (row) => row.ID, sortable: true },
     { name: "Batch", selector: (row) => row.year, sortable: true },
@@ -61,7 +58,7 @@ const BatchList = () => {
 
   return (
     <>
-      <div className="flex flex-col mx-5 my-5">
+      <div className="flex flex-col   mx-5 my-5">
         <div className="flex justify-between px-4 py-2">
           <h2 className="text-xl font-bold">Batch Details </h2>
           <button
@@ -73,7 +70,16 @@ const BatchList = () => {
         </div>
         <div>
           {isLoading && (
-            <h1 className="text-4xl text-center text-black">Loading...</h1>
+            <div className=" h-[80vh] flex justify-center items-center">
+              <div
+                className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            </div>
           )}
           {!!data && <Tables data={batchData} columns={columns} />}
         </div>

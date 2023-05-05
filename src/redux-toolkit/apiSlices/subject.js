@@ -1,9 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getAuthToken } from "../../utils/auth";
+
 export const subjectApi = createApi({
   reducerPath: "subjectApi",
   tagTypes: ["Subject"],
-  baseQuery: fetchBaseQuery({ baseUrl: "http://20.104.198.15:5001" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://curriculum.timalsinasagar.com.np",
+  }),
   endpoints: (builder) => ({
     getAllSubjects: builder.query({
       query: () => `/subjects`,

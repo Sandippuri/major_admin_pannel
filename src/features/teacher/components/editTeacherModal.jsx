@@ -1,46 +1,58 @@
-import React, { useState } from "react";
 import Modal from "../../../components/ui/modal";
+import { useState, useEffect } from "react";
 import InputField from "../../../components/ui/inputfield";
 import Textarera from "../../../components/ui/textarera";
+import { useGetAllDepartmentsQuery } from "../../../redux-toolkit/apiSlices/department";
 import {
   useGetAllCollegesQuery,
   useGetSingleCollegeQuery,
 } from "../../../redux-toolkit/apiSlices/college";
+import {
+  useEditProgrammeMutation,
+  useGetSingleProgrammeQuery,
+} from "../../../redux-toolkit/apiSlices/programme";
+import { useGetSingleCollegeDepartmentQuery } from "../../../redux-toolkit/apiSlices/collegeDepartment";
+import { useGetSingleTeacherQuery } from "../../../redux-toolkit/apiSlices/teacher";
 import Button from "../../../components/ui/button";
-import { useGetAllDepartmentsQuery } from "../../../redux-toolkit/apiSlices/department";
-import { useAddTeacherMutation } from "../../../redux-toolkit/apiSlices/teacher";
 import { toast } from "react-toastify";
 
-const AddTeacherModal = ({ isOpen, closeModal }) => {
-  const [teacher, setTeacher] = useState(null);
+const EditTeacherModal = ({ isOpen, closeModal, teacherID }) => {
   const [selectedCollegeID, setSelectedCollegeID] = useState(null);
+  console.log(teacherID);
   const { data: departmentData } = useGetAllDepartmentsQuery();
   const { data: collegeData, isLoading } = useGetAllCollegesQuery();
+  const { data: singleTeacher } = useGetSingleTeacherQuery(teacherID);
   const { data: singleCollege } = useGetSingleCollegeQuery(selectedCollegeID);
-  const [addTeacher] = useAddTeacherMutation();
-  console.log("singleCollege", singleCollege);
-
-  const handleSubmit = async (e) => {
+  const [editProgramme] = useEditProgrammeMutation();
+  const [editedData, setEditedData] = useState(null);
+  const singleTeacherValue = singleTeacher?.data?.data;
+  console.log(singleTeacher?.data?.campusdepartment);
+  useEffect(() => {
+    if (singleTeacherValue) {
+      setEditedData(singleTeacherValue);
+    }
+  }, [singleTeacherValue]);
+  // console.log(editedData);
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(teacher);
-    const teacherData = {
+    const teacherEditedData = {
       data: {
         attributes: {
-          title: teacher.title,
-          full_name: teacher.full_name,
-          post: teacher.post,
-          campusDepartmentId: teacher.campusDepartmentId,
+          title: editedData.title,
+          first_name: editedData.first_name,
+          last_name: editedData.last_name,
+          post: editedData.post,
+          campusDepartmentId: editedData.campusDepartmentId,
         },
       },
     };
-    console.log(teacherData);
     try {
-      const response = await addTeacher(teacherData);
+      const response = await editProgramme();
       console.log(response);
       if (response?.error?.status === 400) {
         toast.error(response?.error?.data?.error);
       } else {
-        toast.success("Teacher added successfully");
+        toast.success("Subject Edited successfully");
         closeModal();
       }
     } catch (error) {
@@ -52,10 +64,10 @@ const AddTeacherModal = ({ isOpen, closeModal }) => {
     <Modal
       isOpen={isOpen}
       closeModal={closeModal}
-      title="Add Teacher"
+      title="Edit Subject"
       className="w-[30vw]"
     >
-      <form onSubmit={handleSubmit} className="text-md flex flex-col gap-2">
+      <form className="text-md" onSubmit={submitHandler}>
         <div>
           <label
             htmlFor="campusProgramme"
@@ -66,16 +78,17 @@ const AddTeacherModal = ({ isOpen, closeModal }) => {
           <select
             name="campusProgramme"
             className="input-field"
+            value={editedData?.title || ""}
             onChange={(e) => {
-              setTeacher({ ...teacher, title: e.target.value });
+              setEditedData({ ...editedData, title: e.target.value });
             }}
           >
             <option value="">Select Title</option>
-            <option value="Doctor">Dr.</option>
-            <option value="Professor">Prof.</option>
-            <option value="Professor Doctor">Prof. Dr.</option>
-            <option value="Associate Professor">Assoc Prof.</option>
-            <option value="Assistant Professor">Asst Prof.</option>
+            <option value="Dr.">Dr.</option>
+            <option value="Prof.">Prof.</option>
+            <option value="Prof. Dr.">Prof. Dr.</option>
+            <option value="Assoc Prof.">Assoc Prof.</option>
+            <option value="Asst Prof.">Asst Prof.</option>
             <option value="Ms.">Ms.</option>
             <option value="Mr.">Mr.</option>
             <option value="Mrs.">Mrs.</option>
@@ -85,10 +98,22 @@ const AddTeacherModal = ({ isOpen, closeModal }) => {
           name={"name"}
           type={"text"}
           id={"name"}
-          title={"Full Name"}
+          title={"First Name"}
           required={true}
+          value={editedData?.first_name || ""}
           onChange={(e) => {
-            setTeacher({ ...teacher, full_name: e.target.value });
+            setEditedData({ ...editedData, first_name: e.target.value });
+          }}
+        />
+        <InputField
+          name={"name"}
+          type={"text"}
+          id={"id"}
+          title={"Last Name"}
+          required={true}
+          value={editedData?.last_name || ""}
+          onChange={(e) => {
+            setEditedData({ ...editedData, last_name: e.target.value });
           }}
         />
         <InputField
@@ -96,9 +121,10 @@ const AddTeacherModal = ({ isOpen, closeModal }) => {
           type={"text"}
           id={"post"}
           title={"Post"}
+          value={editedData?.post || ""}
           required={true}
           onChange={(e) => {
-            setTeacher({ ...teacher, post: e.target.value });
+            setEditedData({ ...editedData, post: e.target.value });
           }}
         />
         <div>
@@ -111,6 +137,7 @@ const AddTeacherModal = ({ isOpen, closeModal }) => {
           <select
             name="campusProgramme"
             className="input-field"
+            value={editedData?.campusdepartment?.campus?.ID}
             onChange={(e) => {
               setSelectedCollegeID(e.target.value);
             }}
@@ -133,12 +160,8 @@ const AddTeacherModal = ({ isOpen, closeModal }) => {
           <select
             name="campusProgramme"
             className="input-field"
-            onChange={(e) => {
-              setTeacher({
-                ...teacher,
-                campusDepartmentId: Number(e.target.value),
-              });
-            }}
+            value={editedData?.campusdepartment?.department?.ID}
+            onChange={(e) => {}}
           >
             <option value="">Select Department</option>
             {singleCollege?.value?.campusDepartments?.map(
@@ -162,4 +185,4 @@ const AddTeacherModal = ({ isOpen, closeModal }) => {
   );
 };
 
-export default AddTeacherModal;
+export default EditTeacherModal;

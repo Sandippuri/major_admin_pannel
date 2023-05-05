@@ -6,11 +6,14 @@ export const sectionApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://student.timalsinasagar.com.np",
   }),
+  tagTypes: ["Section"],
   endpoints: (builder) => ({
     getAllSections: builder.query({
       query: () => `/sections`,
+      providesTags: ["Section"],
     }),
     addSection: builder.mutation({
+      invalidatesTags: ["Section"],
       query: (section) => ({
         url: `/sections/`,
         method: "POST",
@@ -18,11 +21,27 @@ export const sectionApi = createApi({
         headers: {
           "Content-type": "application/json; charset=UTF-8",
           Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwic3R1ZGVudElkIjotMSwidGVhY2hlcklkIjotMSwiaWF0IjoxNjc3MDY3MDA1fQ.90Z7xGV_rSOwZ1_MBa17K287dGFp6IrgHSbAx07Ewrw",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwic3R1ZGVudElkIjotMSwidGVhY2hlcklkIjotMSwiaWF0IjoxNjgyOTMyOTg1fQ.BmlLC9xQkGELZEl0_ND1x9-cPUlVGxQbWDB3mbICJQQ",
+        },
+      }),
+    }),
+    deleteSection: builder.mutation({
+      invalidatesTags: ["Section"],
+      query: (id) => ({
+        url: `/sections/${id}`,
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwic3R1ZGVudElkIjotMSwidGVhY2hlcklkIjotMSwiaWF0IjoxNjgyOTMyOTg1fQ.BmlLC9xQkGELZEl0_ND1x9-cPUlVGxQbWDB3mbICJQQ",
         },
       }),
     }),
   }),
 });
 
-export const { useGetAllSectionsQuery, useAddSectionMutation } = sectionApi;
+export const {
+  useGetAllSectionsQuery,
+  useAddSectionMutation,
+  useDeleteSectionMutation,
+} = sectionApi;

@@ -29,13 +29,22 @@ const CollegeDepartmentList = () => {
         </div>
         <div>
           {isLoading && (
-            <h1 className="text-4xl text-center text-black">Loading...</h1>
+            <div className=" h-[80vh] flex justify-center items-center">
+              <div
+                className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            </div>
           )}
           <div className="grid grid-cols-2 gap-4">
             {collegeData?.value.map((college) => (
               <Card
                 key={college.ID}
-                className="flex flex-col gap-2"
+                className="flex flex-col gap-2 px-4"
                 onClick={() => navigate(`/college_department/${college.ID}`)}
               >
                 <h1 className="text-xl font-bold">{college?.name}</h1>
@@ -47,7 +56,11 @@ const CollegeDepartmentList = () => {
                   )}
 
                   {college?.campusDepartments?.map((campusDepartment) => {
-                    return <h3>{campusDepartment?.department?.name}</h3>;
+                    return (
+                      <h3 key={campusDepartment.ID}>
+                        {campusDepartment?.department?.name}
+                      </h3>
+                    );
                   })}
                 </div>
               </Card>
