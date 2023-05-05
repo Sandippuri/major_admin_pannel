@@ -45,6 +45,16 @@ const AddCollegeModal = ({ isOpen, closeModal }) => {
           onChange={(e) => setCollege({ ...college, name: e.target.value })}
         />
         <InputField
+          name={"prefix"}
+          type={"text"}
+          id={"prefix"}
+          className="my-1"
+          title={"Prefix"}
+          placeholder={"e.g. PUL"}
+          required={true}
+          onChange={(e) => setCollege({ ...college, prefix: e.target.value })}
+        />
+        <InputField
           name={"address"}
           type={"text"}
           id={"collegename"}

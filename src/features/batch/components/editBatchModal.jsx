@@ -56,7 +56,7 @@ const EditBatchModal = ({ isOpen, closeModal, batchId }) => {
         </label>
         <input
           type="text"
-          value={editedData?.year}
+          value={editedData?.year || ""}
           onChange={(e) =>
             setEditedData({ ...editedData, year: Number(e.target.value) })
           }

@@ -24,7 +24,7 @@
         @apply px-[18px] py-[6px] font-medium rounded-[5px] text-[13.28px] leading-[16px];
       }
       .btn-primary {
-        @apply text-white bg-[#23353F];
+        @apply text-white bg-[#23353F] hover:bg-[#10222c];
       }
       .btn-secondary{
         @apply text-black bg-gray-200;

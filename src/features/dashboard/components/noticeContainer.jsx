@@ -27,7 +27,7 @@ const Notice = () => {
           <h2 className="text-2xl font-medium">Notice</h2>
         </div>
         <div className="">
-          <div className="h-[80vh] flex flex-col overflow-scroll scrollbar-hide ">
+          <div className="h-[80vh] pl-4 flex flex-col overflow-scroll scrollbar-hide">
             {data?.value?.map((notice) => {
               return (
                 <Noticeitem

@@ -42,28 +42,17 @@ const SubjectList = () => {
     {
       name: "Actions",
       cell: (row) => (
-        <div className="flex gap-2">
-          <button
-            className="text-primary hover:text-green-500"
-            onClick={() => {
-              setSubjectId(row.id);
-              setEditSubjectModalOpen(true);
-            }}
-          >
-            <MdOutlineModeEditOutline size={24} />
-          </button>
-          <button
-            id={row.ID}
-            onClick={() => {
-              setSubjectId(row.id);
-              setDeleteModalOpen(true);
-            }}
-            // onClick={() => deleteDepartment(row.ID)}
-            className="text-primary hover:text-red-500"
-          >
-            <MdOutlineDelete size={24} />
-          </button>
-        </div>
+        <button
+          id={row.ID}
+          onClick={() => {
+            setSubjectId(row.id);
+            setDeleteModalOpen(true);
+          }}
+          // onClick={() => deleteDepartment(row.ID)}
+          className="text-primary hover:text-red-500"
+        >
+          <MdOutlineDelete size={24} />
+        </button>
       ),
       ignoreRowClick: true,
       allowOverflow: true,
@@ -89,7 +78,16 @@ const SubjectList = () => {
         </div> */}
         <div>
           {isLoading && (
-            <h1 className="text-4xl text-center text-black">Loading...</h1>
+            <div className=" h-[80vh] flex justify-center items-center">
+              <div
+                className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            </div>
           )}
           {!!data && <Tables data={subjectData} columns={columns} />}
         </div>

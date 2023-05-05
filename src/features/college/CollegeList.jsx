@@ -26,6 +26,7 @@ const CollegeList = () => {
   const rowId = useSelector((state) => state.rowId);
   const columns = [
     { name: "S No.", selector: (row) => row.ID, sortable: true },
+    { name: "Prefix", selector: (row) => row.prefix, sortable: true },
     { name: "College name", selector: (row) => row.name, sortable: true },
     { name: "Location", selector: (row) => row.location, sortable: true },
     {
@@ -60,10 +61,6 @@ const CollegeList = () => {
     },
   ];
 
-  const onRowClicked = (id) => {
-    // navigate(`/student/${row.id}`);
-    console.log("this is" + id);
-  };
   return (
     <>
       <div className="flex flex-col mx-5 my-5">
@@ -82,7 +79,16 @@ const CollegeList = () => {
         </div> */}
         <div>
           {isLoading && (
-            <h1 className="text-4xl text-center text-black">Loading...</h1>
+            <div className=" h-[80vh] flex justify-center items-center">
+              <div
+                className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            </div>
           )}
           {!!data && <Tables data={campusData} columns={columns} />}
         </div>

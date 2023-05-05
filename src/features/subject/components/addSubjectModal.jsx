@@ -12,8 +12,12 @@ const AddSubjectModal = ({ isOpen, closeModal }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log(subject);
     try {
-      const response = await addSubject(subject);
+      const response = await addSubject({
+        ...subject,
+        has_practical: practical,
+      });
       console.log(response);
       if (response?.error?.status === 400) {
         toast.error(response?.error?.data?.error);
@@ -125,7 +129,7 @@ const AddSubjectModal = ({ isOpen, closeModal }) => {
                 setSubject({
                   ...subject,
                   practical: {
-                    ...practical,
+                    ...subject.practical,
                     marks: Number(e.target.value),
                   },
                 });
@@ -143,8 +147,8 @@ const AddSubjectModal = ({ isOpen, closeModal }) => {
                 setSubject({
                   ...subject,
                   practical: {
-                    ...practical,
                     passPercent: Number(e.target.value),
+                    ...subject.practical,
                   },
                 });
               }}

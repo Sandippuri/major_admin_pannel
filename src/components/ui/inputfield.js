@@ -5,7 +5,7 @@ const Inputfield = (props) => {
     <div className={props.className}>
       <label
         htmlFor={props.name}
-        className="block mb-2 text-sm font-medium text-primary"
+        className="block mb-1 text-sm font-medium text-primary"
       >
         {props.title}
       </label>
@@ -17,6 +17,7 @@ const Inputfield = (props) => {
         id={props.id}
         className={`${props.width} input-field`}
         placeholder={props.placeholder}
+        disabled={props.disabled}
         required
       />
     </div>

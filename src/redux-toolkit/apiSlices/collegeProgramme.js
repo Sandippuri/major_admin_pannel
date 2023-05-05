@@ -8,15 +8,24 @@ export const collegeProgrammeApi = createApi({
     getAllCollegeProgrammes: builder.query({
       query: () => `/campus_programme`,
     }),
-    addCollegeProgramme: builder.mutation({
+    addDepartmentProgramme: builder.mutation({
       query: (collegeProgramme) => ({
         url: `/campus_programme/`,
         method: "POST",
         body: collegeProgramme,
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwic3R1ZGVudElkIjotMSwidGVhY2hlcklkIjotMSwiaWF0IjoxNjc3MDY3MDA1fQ.90Z7xGV_rSOwZ1_MBa17K287dGFp6IrgHSbAx07Ewrw",
+          Authorization: getAuthToken(),
+        },
+      }),
+    }),
+    deleteCollegeProgramme: builder.mutation({
+      query: (id) => ({
+        url: `/campus_programme/${id}`,
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: getAuthToken(),
         },
       }),
     }),
@@ -25,5 +34,6 @@ export const collegeProgrammeApi = createApi({
 
 export const {
   useGetAllCollegeProgrammesQuery,
-  useAddCollegeProgrammeMutation,
+  useAddDepartmentProgrammeMutation,
+  useDeleteCollegeProgrammeMutation,
 } = collegeProgrammeApi;

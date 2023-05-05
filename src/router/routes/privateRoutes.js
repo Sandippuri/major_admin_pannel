@@ -4,6 +4,7 @@ import College from "../../pages/college";
 import {
   CollegeDepartment,
   CollegeDepartmentDetails,
+  DepartmentProgramDetails,
 } from "../../pages/collegeDepartment";
 import { Student, StudentDetails } from "../../pages/student";
 import Teacher from "../../pages/teacher";
@@ -17,6 +18,7 @@ import CollegeProgramme from "../../pages/collegeProgramme";
 import Batch from "../../pages/batch";
 import Subject from "../../pages/subject";
 import Section from "../../pages/section";
+import CreateUser from "../../features/authentication/CreateUser";
 
 const privateRoutes = [
   {
@@ -31,12 +33,16 @@ const privateRoutes = [
     },
     children: [
       // superadmin Routes
-      { path: "/", element: <Home /> },
+      { path: "/", element: <College /> },
       { path: "/colleges", element: <College /> },
       { path: "/college_department", element: <CollegeDepartment /> },
       {
         path: "/college_department/:collegeDepartmentId",
         element: <CollegeDepartmentDetails />,
+      },
+      {
+        path: "/college_department/:collegeDepartmentId/department_programme/:departmentProgrammeId",
+        element: <DepartmentProgramDetails />,
       },
       { path: "/students", element: <Student /> },
       { path: "students/:studentID", element: <StudentDetails /> },
@@ -49,6 +55,7 @@ const privateRoutes = [
       { path: "/batch", element: <Batch /> },
       { path: "/sections", element: <Section /> },
       { path: "/results", element: <Result /> },
+      { path: "/createUser", element: <CreateUser /> },
 
       //admin routes
       // { path: "/dashboard", element: <Home /> },

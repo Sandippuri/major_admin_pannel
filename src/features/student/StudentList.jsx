@@ -1,9 +1,16 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useGetAllStudentsQuery } from "../../redux-toolkit/apiSlices/student";
+import {
+  useGetAllStudentsQuery,
+  useDeleteStudentMutation,
+} from "../../redux-toolkit/apiSlices/student";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import AddStudentModal from "./components/addStudentModal";
+import { MdOutlineDelete, MdOutlineModeEditOutline } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import EditStudentModal from "./components/editStudentModal";
+import DeleteModal from "./components/deleteModal";
 
 const style = {
   cells: {
@@ -20,10 +27,14 @@ const style = {
 };
 
 const StudentList = () => {
+  const [studentId, setStudentId] = useState();
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [editStudentModalOpen, setEditStudentModalOpen] = useState(false);
   const [addStudentModalOpen, setAddStudentModalOpen] = useState(false);
   const [filterText, setFilterText] = useState("");
   // con[st dispatch = useDispatch();
   const { data, isLoading } = useGetAllStudentsQuery();
+  const [deleteStudent] = useDeleteStudentMutation();
   // const { singleStudentData = data } = useGetStudentQuery(1);
   // const studentData = data?.value;
   // console.log(singleStudentData);
@@ -51,16 +62,28 @@ const StudentList = () => {
 
   const columns = [
     { name: "S No.", selector: (row) => row.id, sortable: true },
+    { name: "Roll number", selector: (row) => row.rollNumber, sortable: true },
     { name: "Student name", selector: (row) => row.name, sortable: true },
     {
-      name: "Date of Birth",
-      selector: (row) => new Date(row.dateOfBirth).toDateString(),
-      sortable: true,
-    },
-    {
-      name: "Citizenship Number",
-      selector: (row) => row.citizenshipNumber,
-      sortable: true,
+      name: "Actions",
+      cell: (row) => (
+        <div className="flex gap-2">
+          <button
+            id={row.ID}
+            onClick={() => {
+              setStudentId(row.id);
+              setDeleteModalOpen(true);
+            }}
+            // onClick={() => deleteDepartment(row.ID)}
+            className="text-primary hover:text-red-500"
+          >
+            <MdOutlineDelete size={24} />
+          </button>
+        </div>
+      ),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
     },
   ];
 
@@ -79,7 +102,16 @@ const StudentList = () => {
 
         <div>
           {isLoading && (
-            <h1 className="text-4xl text-center text-black">Loading...</h1>
+            <div className=" h-[80vh] flex justify-center items-center">
+              <div
+                className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            </div>
           )}
           {!!data && (
             <DataTable
@@ -98,6 +130,29 @@ const StudentList = () => {
       <AddStudentModal
         isOpen={addStudentModalOpen}
         closeModal={() => setAddStudentModalOpen(false)}
+      />
+      <EditStudentModal
+        isOpen={editStudentModalOpen}
+        closeModal={() => setEditStudentModalOpen(false)}
+        studentId={studentId}
+      />
+      <DeleteModal
+        isOpen={deleteModalOpen}
+        closeModal={() => setDeleteModalOpen(false)}
+        onClick={async () => {
+          try {
+            const response = await deleteStudent(studentId);
+            console.log(response);
+            if (response?.error?.originalStatus === 400) {
+              toast.error(response?.error?.data);
+            } else {
+              toast.success("Student deleted successfully");
+              setDeleteModalOpen(false);
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }}
       />
     </>
   );

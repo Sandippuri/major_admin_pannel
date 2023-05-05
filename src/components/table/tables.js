@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useMemo } from "react";
 import DataTable from "react-data-table-component";
 import "./style.css";
 
@@ -30,7 +29,7 @@ const Tables = (props) => {
         className="input-field w-1/5 mb-2"
         id="search"
         type="text"
-        placeholder="Filter table data..."
+        placeholder="Search table data..."
         value={filterText}
         onChange={(e) => setFilterText(e.target.value)}
       />

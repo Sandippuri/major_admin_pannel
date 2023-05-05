@@ -7,9 +7,11 @@ import {
   useGetAllCollegesQuery,
   useAddCollegeMutation,
 } from "../../../redux-toolkit/apiSlices/college";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AddCollegeDepartmentModal = ({ isOpen, closeModal }) => {
+  const navigate = useNavigate();
   const [collegeDepartment, setCollegeDepartment] = useState({});
   const [selectedDepartmentIds, setSelectedDepartmentIds] = useState([]);
   const { data: collegeData } = useGetAllCollegesQuery();
@@ -27,8 +29,9 @@ const AddCollegeDepartmentModal = ({ isOpen, closeModal }) => {
       if (response?.error?.status === 400) {
         toast.error(response?.error?.data?.error);
       } else {
-        toast.success("Campus Deaprtment added successfully");
+        toast.success("Campus Department added successfully");
         closeModal();
+        navigate(0);
       }
     } catch (error) {
       console.log(error);

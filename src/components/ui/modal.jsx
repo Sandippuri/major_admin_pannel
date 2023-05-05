@@ -41,7 +41,9 @@ const Modal = ({
                   )}
                 >
                   <div className="px-[26px] py-[15px] flex items-center justify-between gap-x-2 bg-primary">
-                    <h3 className="typography-3 text-white">{title}</h3>
+                    <h3 className="typography-3 text-white text-md font-medium">
+                      {title}
+                    </h3>
                     <button onClick={closeModal} className=" text-white px-2">
                       X
                     </button>

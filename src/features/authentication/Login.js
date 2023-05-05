@@ -15,25 +15,29 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login(user);
+      console.log(response.data.value);
       if (response.data.value) {
         dispatch(loginUser({ token: response.data.value }));
         toast.success("Login Successful");
+        navigate("/colleges");
       }
     } catch (e) {
       toast.error("Login Failed");
     }
-    navigate("/");
   };
 
   return (
     <section className="bg-primary">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-        <a
-          href="#"
-          className="flex items-center mb-6 text-2xl font-semibold text-white"
-        >
-          IOE-APP
-        </a>
+      <div className="flex flex-col items-center justify-center px-6 py-4 mx-auto h-screen lg:py-0">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Tu_2.png/150px-Tu_2.png"
+          alt="ioe"
+          width={150}
+        />
+
+        <p className="flex items-center mb-6 text-2xl font-semibold text-white">
+          IOE Admin Dashboard
+        </p>
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl text-primary">

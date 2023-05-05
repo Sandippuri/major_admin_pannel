@@ -9,6 +9,7 @@ import AddDepartmentModal from "./components/addDepartmentModal";
 import EditDepartmentModal from "./components/editDepartmentModal";
 import DeleteModal from "./components/deleteModal";
 import { toast } from "react-toastify";
+import { MdOutlineDelete, MdOutlineModeEditOutline } from "react-icons/md";
 
 const DepartmentList = () => {
   const [departmentId, setDepartmentId] = useState();
@@ -27,13 +28,13 @@ const DepartmentList = () => {
       cell: (row) => (
         <div className="flex gap-2">
           <button
-            className="bg-primary hover:bg-green-500 p-1 rounded-sm text-white"
+            className="text-primary hover:text-green-500 "
             onClick={() => {
               setDepartmentId(row.ID);
               setEditDepartmentModalOpen(true);
             }}
           >
-            Edit
+            <MdOutlineModeEditOutline size={24} />
           </button>
           <button
             id={row.ID}
@@ -42,9 +43,9 @@ const DepartmentList = () => {
               setDeleteModalOpen(true);
             }}
             // onClick={() => deleteDepartment(row.ID)}
-            className="bg-primary hover:bg-red-500 p-1 rounded-sm text-white"
+            className="text-primary hover:text-red-500 "
           >
-            Delete
+            <MdOutlineDelete size={24} />
           </button>
         </div>
       ),
@@ -68,7 +69,16 @@ const DepartmentList = () => {
         </div>
         <div>
           {isLoading && (
-            <h1 className="text-4xl text-center text-black">Loading...</h1>
+            <div className=" h-[80vh] flex justify-center items-center">
+              <div
+                className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            </div>
           )}
           {!!data && <Tables data={departmentData} columns={columns} />}
         </div>

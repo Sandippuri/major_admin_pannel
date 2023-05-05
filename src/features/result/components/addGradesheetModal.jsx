@@ -7,11 +7,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const AddResultModal = ({ isOpen, closeModal }) => {
+const AddGradeSheetModal = ({ isOpen, closeModal }) => {
   const navigate = useNavigate();
   const [file, setFile] = useState();
   const [partOption, setPartOption] = useState("I");
   const [examYear, setExamYear] = useState("");
+  const [programme, setProgramme] = useState("");
   const [typeOption, setTypeOption] = useState("Regular");
   const [selectDropdownOption, setSelectDropdownOption] = useState("I");
   const [addResult] = useAddResultMutation();
@@ -23,6 +24,7 @@ const AddResultModal = ({ isOpen, closeModal }) => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("ExamYear", examYear);
+      formData.append("Programme", programme);
       formData.append("Type", typeOption);
       formData.append("Year", selectDropdownOption);
       formData.append("Part", partOption);
@@ -31,7 +33,7 @@ const AddResultModal = ({ isOpen, closeModal }) => {
       try {
         await axios
           .post(
-            "http://result.timalsinasagar.com.np/symbolnumber/upload/",
+            "http://result.timalsinasagar.com.np/gradesheet/upload/",
             formData,
             {
               headers: {
@@ -41,26 +43,16 @@ const AddResultModal = ({ isOpen, closeModal }) => {
               },
             }
           )
-          .then((res) => {
-            console.log(res);
-            if (res.status === 200) {
-              toast.success("Symbol No. Sheet added successfully");
+          .then((response) => {
+            console.log(response);
+            if (response.status === 200) {
+              toast.success("Gradesheet added successfully");
               closeModal();
               navigate(0);
-            } else {
-              toast.error(res.data.message);
             }
           });
-        // console.log("response", response);
-        // if (response?.response?.status === 400) {
-        //   toast.error(response?.response?.data);
-        // } else {
-        //   toast.success("Symbol No. Sheet added successfully");
-        //   closeModal();
-        //   navigate(0);
-        // }
       } catch (error) {
-        console.error("error", error);
+        toast.error(error?.response?.data);
       }
       // try {
       //   const response = await addResult(formData);
@@ -75,7 +67,7 @@ const AddResultModal = ({ isOpen, closeModal }) => {
     <Modal
       isOpen={isOpen}
       closeModal={closeModal}
-      title="Add Result"
+      title="Add Gradesheet"
       className="w-[30vw]"
     >
       <form className="text-md flex flex-col gap-2" onSubmit={handleSubmit}>
@@ -86,6 +78,15 @@ const AddResultModal = ({ isOpen, closeModal }) => {
           title={"Exam Year"}
           onChange={(e) => setExamYear(e.target.value)}
           placeholder={"Enter the notice"}
+          required={true}
+        />
+        <Inputfield
+          name={"title"}
+          type={"text"}
+          id={"name"}
+          title={"Programme"}
+          onChange={(e) => setProgramme(e.target.value)}
+          placeholder={"Enter programme"}
           required={true}
         />
         <div className="flex gap-20">
@@ -194,4 +195,4 @@ const AddResultModal = ({ isOpen, closeModal }) => {
   );
 };
 
-export default AddResultModal;
+export default AddGradeSheetModal;
